@@ -212,4 +212,5 @@
 		<project id="Lab6.3_ASM_MOV_Absolute_Addressing_Ward.com.ti.ccstudio.buildDefinitions.MSP430.ProjectType.1545144580" name="MSP430" projectType="com.ti.ccstudio.buildDefinitions.MSP430.ProjectType"/>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration"/>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>
