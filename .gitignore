@@ -1,0 +1,157 @@
+
+*.pma
+*.json
+*.fingerprint
+*.log
+*.db
+*.bin
+*.txt
+*.pb
+*.sig
+*.dll
+*.pdom
+*.db-journal
+*.localstorage
+*.xml
+*.version
+*.index
+*.cache
+*.tree
+*.resources
+*.higher
+*.xmi
+*.mark
+*.history
+*.ini
+*.prefs
+*.properties
+*.properties
+.jxbrowser.userdata/CertificateRevocation/6830/crl-set
+.jxbrowser.userdata/CertificateRevocation/6830/LICENSE
+.jxbrowser.userdata/Crowd Deny/2021.8.23.1140/Preload Data
+.jxbrowser.userdata/Default/AutofillStrikeDatabase/LOCK
+.jxbrowser.userdata/Default/AutofillStrikeDatabase/LOG
+.jxbrowser.userdata/Default/BudgetDatabase/LOCK
+.jxbrowser.userdata/Default/BudgetDatabase/LOG
+.jxbrowser.userdata/Default/Cache/data_0
+.jxbrowser.userdata/Default/Cache/data_1
+.jxbrowser.userdata/Default/Cache/data_2
+.jxbrowser.userdata/Default/Cache/data_3
+.jxbrowser.userdata/Default/Cache/f_000001
+.jxbrowser.userdata/Default/Cache/f_000002
+.jxbrowser.userdata/Default/Cache/f_000003
+.jxbrowser.userdata/Default/Cache/f_000004
+.jxbrowser.userdata/Default/Cache/index
+.jxbrowser.userdata/Default/Code Cache/js/26d83c7dcaa70431_0
+.jxbrowser.userdata/Default/Code Cache/js/28f557fe0e4023dc_0
+.jxbrowser.userdata/Default/Code Cache/js/2d4a42dcbf83fee9_0
+.jxbrowser.userdata/Default/Code Cache/js/2fa7999e08e97c85_0
+.jxbrowser.userdata/Default/Code Cache/js/6e8544dcfa7eed47_0
+.jxbrowser.userdata/Default/Code Cache/js/78a815d8fdbad03f_0
+.jxbrowser.userdata/Default/Code Cache/js/81198e7233542828_0
+.jxbrowser.userdata/Default/Code Cache/js/913a2fca1b31807d_0
+.jxbrowser.userdata/Default/Code Cache/js/bded61f19f158bb3_0
+.jxbrowser.userdata/Default/Code Cache/js/c3780b3a41bc20e6_0
+.jxbrowser.userdata/Default/Code Cache/js/cb10afb3761de364_0
+.jxbrowser.userdata/Default/Code Cache/js/e6cab5d34340a528_0
+.jxbrowser.userdata/Default/Code Cache/js/f3fe6846a568efcf_0
+.jxbrowser.userdata/Default/Code Cache/js/index
+.jxbrowser.userdata/Default/Code Cache/js/index-dir/the-real-index
+.jxbrowser.userdata/Default/Code Cache/wasm/index
+.jxbrowser.userdata/Default/Code Cache/wasm/index-dir/the-real-index
+.jxbrowser.userdata/Default/Cookies
+.jxbrowser.userdata/Default/Cookies-journal
+.jxbrowser.userdata/Default/Current Session
+.jxbrowser.userdata/Default/Current Tabs
+.jxbrowser.userdata/Default/data_reduction_proxy_leveldb/CURRENT
+.jxbrowser.userdata/Default/data_reduction_proxy_leveldb/LOCK
+.jxbrowser.userdata/Default/data_reduction_proxy_leveldb/LOG
+.jxbrowser.userdata/Default/data_reduction_proxy_leveldb/MANIFEST-000002
+.jxbrowser.userdata/Default/Extension State/CURRENT
+.jxbrowser.userdata/Default/Extension State/LOCK
+.jxbrowser.userdata/Default/Extension State/LOG
+.jxbrowser.userdata/Default/Extension State/MANIFEST-000001
+.jxbrowser.userdata/Default/Favicons
+.jxbrowser.userdata/Default/Favicons-journal
+.jxbrowser.userdata/Default/Feature Engagement Tracker/AvailabilityDB/LOCK
+.jxbrowser.userdata/Default/Feature Engagement Tracker/AvailabilityDB/LOG
+.jxbrowser.userdata/Default/Feature Engagement Tracker/EventDB/LOCK
+.jxbrowser.userdata/Default/Feature Engagement Tracker/EventDB/LOG
+.jxbrowser.userdata/Default/GCM Store/Encryption/CURRENT
+.jxbrowser.userdata/Default/GCM Store/Encryption/LOCK
+.jxbrowser.userdata/Default/GCM Store/Encryption/LOG
+.jxbrowser.userdata/Default/GCM Store/Encryption/MANIFEST-000001
+.jxbrowser.userdata/Default/GPUCache/data_0
+.jxbrowser.userdata/Default/GPUCache/data_1
+.jxbrowser.userdata/Default/GPUCache/data_2
+.jxbrowser.userdata/Default/GPUCache/data_3
+.jxbrowser.userdata/Default/GPUCache/index
+.jxbrowser.userdata/Default/History
+.jxbrowser.userdata/Default/History-journal
+.jxbrowser.userdata/Default/Local Storage/leveldb/CURRENT
+.jxbrowser.userdata/Default/Local Storage/leveldb/LOCK
+.jxbrowser.userdata/Default/Local Storage/leveldb/LOG
+.jxbrowser.userdata/Default/Local Storage/leveldb/MANIFEST-000001
+.jxbrowser.userdata/Default/LOCK
+.jxbrowser.userdata/Default/LOG
+.jxbrowser.userdata/Default/Login Data
+.jxbrowser.userdata/Default/Login Data-journal
+.jxbrowser.userdata/Default/Media History
+.jxbrowser.userdata/Default/Media History-journal
+.jxbrowser.userdata/Default/Network Action Predictor
+.jxbrowser.userdata/Default/Network Action Predictor-journal
+.jxbrowser.userdata/Default/Network Persistent State
+.jxbrowser.userdata/Default/Platform Notifications/CURRENT
+.jxbrowser.userdata/Default/Platform Notifications/LOCK
+.jxbrowser.userdata/Default/Platform Notifications/LOG
+.jxbrowser.userdata/Default/Platform Notifications/MANIFEST-000001
+.jxbrowser.userdata/Default/Preferences
+.jxbrowser.userdata/Default/README
+.jxbrowser.userdata/Default/Secure Preferences
+.jxbrowser.userdata/Default/Session Storage/CURRENT
+.jxbrowser.userdata/Default/Session Storage/LOCK
+.jxbrowser.userdata/Default/Session Storage/LOG
+.jxbrowser.userdata/Default/Session Storage/MANIFEST-000001
+.jxbrowser.userdata/Default/shared_proto_db/CURRENT
+.jxbrowser.userdata/Default/shared_proto_db/LOCK
+.jxbrowser.userdata/Default/shared_proto_db/LOG
+.jxbrowser.userdata/Default/shared_proto_db/MANIFEST-000001
+.jxbrowser.userdata/Default/shared_proto_db/metadata/CURRENT
+.jxbrowser.userdata/Default/shared_proto_db/metadata/LOCK
+.jxbrowser.userdata/Default/shared_proto_db/metadata/LOG
+.jxbrowser.userdata/Default/shared_proto_db/metadata/MANIFEST-000001
+.jxbrowser.userdata/Default/Shortcuts
+.jxbrowser.userdata/Default/Shortcuts-journal
+.jxbrowser.userdata/Default/Site Characteristics Database/CURRENT
+.jxbrowser.userdata/Default/Site Characteristics Database/LOCK
+.jxbrowser.userdata/Default/Site Characteristics Database/LOG
+.jxbrowser.userdata/Default/Site Characteristics Database/MANIFEST-000001
+.jxbrowser.userdata/Default/Sync Data/LevelDB/CURRENT
+.jxbrowser.userdata/Default/Sync Data/LevelDB/LOCK
+.jxbrowser.userdata/Default/Sync Data/LevelDB/LOG
+.jxbrowser.userdata/Default/Sync Data/LevelDB/MANIFEST-000001
+.jxbrowser.userdata/Default/Top Sites
+.jxbrowser.userdata/Default/Top Sites-journal
+.jxbrowser.userdata/Default/Visited Links
+.jxbrowser.userdata/Default/Web Data
+.jxbrowser.userdata/Default/Web Data-journal
+.jxbrowser.userdata/First Run
+.jxbrowser.userdata/GrShaderCache/GPUCache/data_0
+.jxbrowser.userdata/GrShaderCache/GPUCache/data_1
+.jxbrowser.userdata/GrShaderCache/GPUCache/data_2
+.jxbrowser.userdata/GrShaderCache/GPUCache/data_3
+.jxbrowser.userdata/GrShaderCache/GPUCache/index
+.jxbrowser.userdata/Last Browser
+.jxbrowser.userdata/Last Version
+.jxbrowser.userdata/Local State
+.jxbrowser.userdata/Module Info Cache
+.jxbrowser.userdata/ShaderCache/GPUCache/data_0
+.jxbrowser.userdata/ShaderCache/GPUCache/data_1
+.jxbrowser.userdata/ShaderCache/GPUCache/data_2
+.jxbrowser.userdata/ShaderCache/GPUCache/data_3
+.jxbrowser.userdata/ShaderCache/GPUCache/index
+.jxbrowser.userdata/Subresource Filter/Indexed Rules/27/9.29.4/Ruleset Data
+.jxbrowser.userdata/Subresource Filter/Unindexed Rules/9.29.4/Filtering Rules
+.metadata/.lock
+.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+.metadata/.plugins/org.eclipse.cdt.make.core/specs.cpp
