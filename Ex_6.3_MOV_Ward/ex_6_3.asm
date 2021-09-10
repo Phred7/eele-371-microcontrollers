@@ -28,8 +28,24 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ;-------------------------------------------------------------------------------
 main:
 
+ind_auto:
+		mov.w	#Block1, R4		; put the value 2000h into R6 to be used as addr
 
+		mov.w	@R4+, R5		; copy data at addr held in R4 into R5, then R4+2-->R4
+		mov.w	@R4+, R6
+		mov.w	@R4+, R7
 
+		mov.b	@R4+, R8		; copy data at addr held in R4 into R8, then R4+1-->R4
+		mov.b	@R4+, R9
+		mov.b	@R4+, R10
+
+ind:
+		mov.w	#Block1, R4
+
+		mov.w	0(R4), 8(R4)	; copy 1st word in Block1 into 1st word into Block2
+		mov.w	2(R4), 10(R4)
+		mov.w	4(R4), 12(R4)
+		mov.w	6(R4), 14(R4)
 
 		jmp		main
 		nop
@@ -41,11 +57,8 @@ main:
 		.data				; goto data mem
 		.retain				; keep the selection
 
-Const1:	.short	01234h		; init 1st word to 1234h
-Const2: .short	0CAFEh		; init 2nd word to CAFEh
-
-Var1:	.space	2			; reserve 3rd word
-Var2:	.space	2			; reserve 4th word
+Block1:	.short	01122h, 03344h, 05566h, 07788h, 099AAh
+Block2:	.space	8
 
 ;-------------------------------------------------------------------------------
 ; Stack Pointer definition
