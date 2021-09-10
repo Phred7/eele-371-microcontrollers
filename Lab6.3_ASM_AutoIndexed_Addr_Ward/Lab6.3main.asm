@@ -23,6 +23,9 @@ RESET       mov.w   #__STACK_END,SP         ; Initialize stackpointer
 StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 
 
+;-------------------------------------------------------------------------------
+; Initialization
+;-------------------------------------------------------------------------------
 init:
 		mov.w	#0, R4			; sets R4-R15 to 0d
 		mov.w	#0, R5
