@@ -40,7 +40,7 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ;
 ; 32-bit:
 ; #1: 1111 1110h, C=1, V=0, N=0, Z=0
-; #2: 8888 9777, C=0, V=0, N=1, Z=0
+; #2: 8888 9777h, C=0, V=0, N=1, Z=0
 ;-------------------------------------------------------------------------------
 main:
 			mov.w	AddendA, R4			; add addends and move into sums
