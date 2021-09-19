@@ -2,8 +2,8 @@
 ; MSP430 Assembler Code Template for use with TI Code Composer Studio
 ; Walker Ward
 ; EELE371
-; 09/14/2021
-; SetClearTest Instructions
+; 09/16/2021
+; Rotate Instructions
 ;
 ;-------------------------------------------------------------------------------
             .cdecls C,LIST,"msp430.h"       ; Include device header file
@@ -26,38 +26,34 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ;-------------------------------------------------------------------------------
 ; Main loop here
 ;-------------------------------------------------------------------------------
-init:
-			mov.w	#00000h, R4
-			mov.w	#0FFFFh, R5
-			mov.w	#0F0F0h, R6
-			mov.w	#0BEEFh, R7
-			mov.w	#0DEEDh, R8
-			mov.w	#00ECEh, R9
-			mov.w	#00000h, R10
-			mov.w	#01000h, R11
-
 main:
-			bis.w	#0000100000001000b, R4		; set 11, 3
-			bis.w	#0000000000000011b, R4		; set 1, 0
 
-			bic.w	#0000010000100000b, R5		; clear 10, 5
-			bic.w	#0000000000000011b, R5		; clear 1, 0
+rot_arith:
+			mov.b	#00000001b, R4
+			clrc
+			rla.b	R4
+			rla.b	R4
+			rla.b	R4
+			rla.b	R4
+			rla.b	R4
+			rla.b	R4
+			rla.b	R4
+			rla.b	R4
+			rla.b	R4
 
-			bit.w	#0000000000000001b, R6		; cleared
-			bit.w	#1000000000000000b, R6		; set	z=0
-			bit.w	#0000000000001111b, R6		; cleared
-			bit.w	#1111000000000000b, R6		; set
+			mov.b	#00000001b, R5
+			clrc
+			rra.b	R5
+			rra.b	R5
+			rra.b	R5
+			rra.b	R5
+			rra.b	R5
+			rra.b	R5
+			rra.b	R5
+			rra.b	R5
+			rra.b	R5
 
-			cmp.w	#0DEEDh, R7
-			cmp.w	#0DEEDh, R8					; z=1
-			cmp.w	#0DEEDh, R9
-
-			tst.w	R7							; n=1 z=0
-			tst.w	R8							; n=1 z=0
-			tst.w	R9							; n=0 z=0
-			tst.w	R10							; n=0 z=1
-
-			jmp		main
+			jmp	main
 			nop
                                             
 
