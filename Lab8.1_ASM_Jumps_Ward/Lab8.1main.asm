@@ -26,7 +26,31 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ;-------------------------------------------------------------------------------
 ; Main loop here
 ;-------------------------------------------------------------------------------
+init:
 
+main:
+			mov.w	#0AAAAh, R4				; move into R4 then jump to add1
+			jmp		add1
+
+sub1:
+			sub.w	#0000Fh, R4				; sub from R4 then jump to toggleAll
+			jmp		toggleAll
+
+rotateLeft:
+			rla.w	R4						; rotate bits left once then jump to done
+			jmp		done
+
+toggleAll:
+			xor.w	#0FFFFh, R4				; use xor to set all bits in R4 then jump to rotateLeft
+			jmp		rotateLeft
+
+add1:
+			add.w	#00005h, R4				; add to R4 then jump to sub1
+			jmp		sub1
+
+done:
+			jmp		main					; jump to main
+			nop
                                             
 
 ;-------------------------------------------------------------------------------
