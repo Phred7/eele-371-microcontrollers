@@ -24,7 +24,11 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ; Main loop here
 ;-------------------------------------------------------------------------------
 init:
-
+			mov.w	#0000h, &P5SEL0
+			mov.w	#0000h, &P5SEL1
+			mov.w	#0000h, &P5DIR
+			bis.b	#00001111b, &P5REN
+			bic.b	#00001111b, &P5OUT
 
 			bis.b	#BIT0, &P1DIR			; set P1.0 as output - LED1
 			bic.b	#BIT0, &P1OUT			; set init val to 0
@@ -38,11 +42,7 @@ init:
 			mov.b	#0000h, &P6SEL0			; ensures default selection
 			mov.b	#0000h, &P6SEL1			; ensures default selection
 
-			mov.w	#0000h, &P5SEL0
-			mov.w	#0000h, &P5SEL1
-			mov.w	#0000h, &P5DIR
-			bis.b	#00001111b, &P5REN
-			bic.b	#00001111b, &P5OUT
+
 
 			bic.b	#LOCKLPM5, &PM5CTL0		; disable DIO low-power default
 main:
