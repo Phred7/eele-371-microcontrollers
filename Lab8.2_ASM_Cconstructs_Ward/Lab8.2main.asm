@@ -52,40 +52,100 @@ init:
 main:
 			bis.b	#BIT0, &P1OUT
 			mov.w	#0FFFFh, R4
+			jmp		main_delay_on
 
-mainDelayOn:
+main_delay_on:
 			dec		R4
-			jnz		mainDelayOn				; if R4 is not zero repeat
+			jnz		main_delay_on				; if R4 is not zero repeat
 			bic.b	#BIT0, &P1OUT
 			mov.w	#0FFFFh, R4
 
-mainDelayOff:
+main_delay_off:
 			dec		R4
-			jnz		mainDelayOff			; if R4 is not zero repeat
+			jnz		main_delay_off				; if R4 is not zero repeat
 
-while:
+if:
 			mov.b	P5IN, R5
-			cmp 	#0001b, R5				; check to see if R5 is equal to 0001b
-			jnz		endWhile				; if R5 (P5IN) is not equal to 0001b
-			bis.b	#BIT6, &P6OUT			; turn on LED2 (Green)
-			mov.w	#0FFFFh, R6
-			jmp		whileDelayOn
+			cmp.w	#01h, R5
+			jnz		else_if_1					; if R5 is equal not equal to 01h, jump to elif_1
 
-whileDelayOn:
+			bic.b	#BIT0, &P1OUT				; disable LED1 (Red)
+			bis.b	#BIT6, &P6OUT				; turn on LED2 (Green)
+			mov.w	global_delay, R6
+			jmp		green_on_delay
+
+else_if_1:
+			cmp.w	#02h, R5
+			jnz		else_if_2					; if R5 is equal not equal to 02h, jump to elif_1
+
+			bis.b	#BIT0, &P1OUT				; enable  LED1 (Red)
+			bic.b	#BIT6, &P6OUT				; disable LED2 (Green)
+			mov.w	global_delay, R6
+			jmp		red_on_delay
+
+else_if_2:
+			cmp.w	#04h, R5
+			jnz		else					; if R5 is equal not equal to 02h, jump to elif_1
+
+			bis.b	#BIT0, &P1OUT				; enable LED1 (Red)
+			bis.b	#BIT6, &P6OUT				; enable LED2 (Green)
+			mov.w	global_delay, R6
+			jmp		both_on_delay
+else:
+			bic.b	#BIT0, &P1OUT
+			bic.b	#BIT6, &P6OUT
+			jmp		end_if
+
+end_if:
+			jmp		if
+
+green_on_delay:
 			dec		R6
-			jnz		whileDelayOn			; if R6 is not =0  jump to whileDelayOn
+			jnz		green_on_delay			; if R6 is not 0 continue decrementing
+			mov.w	global_delay, R6
 			bic.b	#BIT6, &P6OUT			; turn off LED2 (Green)
-			mov.w	#0FFFFh, R6
+			jmp		green_off_delay			; jump to green_off_delay
 
-whileDelayOff:
+green_off_delay:
 			dec		R6
-			jnz		whileDelayOff			; if R6 is not =0 jmp to whileDelayOff
-			jmp		while
+			jnz		green_off_delay			; if R6 is not 0 continue decrementing
+			jmp		end_if					; jmp to end_if
 
-endWhile:
-			jmp		main
+red_on_delay:
+			dec		R6
+			jnz		red_on_delay			; if R6 is not 0 continue decrementing
+			mov.w	global_delay, R6
+			bic.b	#BIT0, &P1OUT
+			jmp		red_off_delay			; jump to red_off_delay
+
+red_off_delay:
+			dec		R6
+			jnz		red_off_delay			; if R6 is not 0 continue decrementing
+			jmp		end_if					; jmp to end_if
+
+both_on_delay:
+			dec		R6
+			jnz		both_on_delay			; if R6 is not 0 continue decrementing
+			mov.w	global_delay, R6
+			bic.b	#BIT0, &P1OUT
+			bic.b	#BIT6, &P6OUT
+			jmp		both_off_delay			; jump to both_off_delay
+
+both_off_delay:
+			dec		R6
+			jnz		both_off_delay			; if R6 is not 0 continue decrementing
+			jmp		end_if					; jmp to end_if
+
+
 			nop
-                                            
+;-------------------------------------------------------------------------------
+; Memory Allocation
+;-------------------------------------------------------------------------------
+
+					.data
+					.retain
+
+global_delay:		.short	08888h
 
 ;-------------------------------------------------------------------------------
 ; Stack Pointer definition
