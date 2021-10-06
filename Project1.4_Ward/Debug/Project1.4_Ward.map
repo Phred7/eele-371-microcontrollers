@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v20.2.5                     
 ******************************************************************************
->> Linked Mon Oct  4 02:13:44 2021
+>> Linked Mon Oct  4 12:25:27 2021
 
 OUTPUT FILE NAME:   <Project1.4_Ward.out>
 ENTRY POINT SYMBOL: "RESET"  address: 00008000
@@ -17,7 +17,7 @@ MEMORY CONFIGURATION
   TLVMEM                00001a00   00000200  00000000  00000200  RWIX
   BOOTCODE              00001c00   00000400  00000000  00000400  RWIX
   RAM                   00002000   00001000  00000046  00000fba  RWIX
-  FRAM                  00008000   00007f80  0000015c  00007e24  RWIX
+  FRAM                  00008000   00007f80  0000018a  00007df6  RWIX
   JTAGSIGNATURE         0000ff80   00000004  00000004  00000000  RWIX  ffff 
   BSLSIGNATURE          0000ff84   00000004  00000004  00000000  RWIX  ffff 
   BSLCONFIGURATIONSIGNA 0000ff88   00000002  00000002  00000000  RWIX  ffff 
@@ -103,12 +103,12 @@ section   page    origin      length       input sections
 
 .const     0    00008000    00000000     UNINITIALIZED
 
-.text      0    00008000    00000154     
-                  00008000    00000154     Project1.4main.obj (.text)
+.text      0    00008000    00000182     
+                  00008000    00000182     Project1.4main.obj (.text)
 
 .text:_isr 
-*          0    00008154    00000008     
-                  00008154    00000008     rts430x_sc_sd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+*          0    00008182    00000008     
+                  00008182    00000008     rts430x_sc_sd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
 .data      0    00002000    00000046     
                   00002000    00000046     Project1.4main.obj (.data)
@@ -221,9 +221,9 @@ MODULE SUMMARY
        Module               code   ro data   rw data
        ------               ----   -------   -------
     .\
-       Project1.4main.obj   340    2         70     
+       Project1.4main.obj   386    2         70     
     +--+--------------------+------+---------+---------+
-       Total:               340    2         70     
+       Total:               386    2         70     
                                                     
     C:\ti\ccs1040\ccs\tools\compiler\ti-cgt-msp430_20.2.5.LTS\lib\rts430x_sc_sd_eabi.lib
        isr_trap.asm.obj     8      0         0      
@@ -255,7 +255,7 @@ MODULE SUMMARY
        Total:               8      48        0      
                                                     
     +--+--------------------+------+---------+---------+
-       Grand Total:         348    50        70     
+       Grand Total:         394    50        70     
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -1171,7 +1171,7 @@ address   name
 000001cc  WDTCTL_L                       
 00003000  __STACK_END                    
 00000000  __STACK_SIZE                   
-00008154  __TI_ISR_TRAP                  
+00008182  __TI_ISR_TRAP                  
 0000ffce  __TI_int22                     
 0000ffd0  __TI_int23                     
 0000ffd2  __TI_int24                     
@@ -2127,7 +2127,7 @@ address   name
 00008000  RESET                          
 00008000  fram_rw_start                  
 00008000  fram_rx_start                  
-00008154  __TI_ISR_TRAP                  
+00008182  __TI_ISR_TRAP                  
 0000ffce  __TI_int22                     
 0000ffd0  __TI_int23                     
 0000ffd2  __TI_int24                     

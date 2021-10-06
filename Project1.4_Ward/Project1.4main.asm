@@ -80,6 +80,7 @@ init:
 
 main:
 			bis.b	#BIT1, R7
+			mov.w	#00h, R5
 
 while:
 			mov.b	P2IN, R13
@@ -104,6 +105,10 @@ if_r5:
 			cmp.w	#09d, R5				; is R5 greater than or equal to 9 decimal
 			jge		w_cont					; R5 cannot be greater than 9 dec. Iterate until SW2 is pressed
 			inc		R5
+			mov.w	global_delay, R13
+if_delay:	dec		R13
+			cmp		#00h, R13
+			jnz		if_delay
 			jmp		w_cont					; iterate
 
 if_not_sw1:									; SW1 is not pressed
@@ -119,13 +124,13 @@ w_else:
 
 end_while:
 			mov.w	#00h, R7
-
+			mov.w	R5, R7
 blink_for:
-			dec		R5
+			dec		R7
 			bis.b	#BIT0, &P1OUT			; turn on LED1 (Red)
 			mov.w	global_delay, R13
 			jmp		green_on_delay
-for_mid:	cmp		#00h, R5				; compare R5 to 0
+for_mid:	cmp		#00h, R7				; compare R5 to 0
 			jnz		blink_for				; if R5 is not 0 then continue iterating
 end_for:	jmp		func_1
 
@@ -216,7 +221,7 @@ end_f3_while:
 
 func_4:
 			bit.b 	#BIT3, P5IN			;	 check to see if P5IN.3 is equal to 1
-			jnz		main				; if R5 (P5IN) is not equal to 0011b
+			jz		main				; if R5 (P5IN) is not equal to 0011b
 			mov.w	@R6+, R9
 			mov.w	#00h, 32(R11)
 			jmp		main
