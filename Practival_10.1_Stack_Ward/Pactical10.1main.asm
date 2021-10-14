@@ -2,8 +2,8 @@
 ; MSP430 Assembler Code Template for use with TI Code Composer Studio
 ; Walker Ward
 ; EELE371
-; 10/13/2021
-; Interrupts
+; 10/15/2021
+; Stack and Subroutines
 ;
 ;-------------------------------------------------------------------------------
             .cdecls C,LIST,"msp430.h"       ; Include device header file
@@ -27,81 +27,54 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ; Main loop here
 ;-------------------------------------------------------------------------------
 init:
-			mov.w	#00h, R4
-			mov.w	#00h, R5
-			mov.w	#00h, R6
-			mov.w	#00h, R7
-
-			bic.b	#BIT1, &P4DIR			; set P4.1 as input - SW1
-			bis.b	#BIT1, &P4REN			; EN pull up/down
-			bis.b	#BIT1, &P4OUT			; pull-up res.
-
-			bic.b	#BIT3, &P2DIR			; set P2.3 as input - SW2
-			bis.b	#BIT3, &P2REN			; EN pull up/down
-			bis.b	#BIT3, &P2OUT			; pull-up res.
-
-			bis.b	#BIT6, &P6DIR			; set P6.6 as output - LED2 (green)
+			bis.b	#BIT6, &P6DIR			; set P6.6 as output - LED2
 			bic.b	#BIT6, &P6OUT			; set init val to 0
 			bic.b	#BIT6, &P6REN			; ensures REN disabled
 			mov.b	#000h, &P6SEL0			; ensures default selection
 			mov.b	#000h, &P6SEL1			; ensures default selection
 
-			bis.b	#BIT0, &P1DIR			; set P1.0 as output - LED1 (red)
+			bis.b	#BIT0, &P1DIR			; set P1.0 as output - LED1
 			bic.b	#BIT0, &P1OUT			; set init val to 0
 			bic.b	#BIT0, &P1REN			; ensures REN disabled
 			mov.b	#000h, &P1SEL0			; ensures default selection
 			mov.b	#000h, &P1SEL1			; ensures default selection
 
-			mov.w	#0000h, &P3SEL0			; def P3.0:P3.3 as input
-			mov.w	#0000h, &P3SEL1
-			mov.w	#0000h, &P3DIR
-			bis.b	#00001111b, &P3REN
-			bic.b	#00001111b, &P3OUT
-
-			bic.b	#11111111b, &P4IFG		; clear interrupt flags on P4
-			bic.b   #BIT1, &P4IES			; set as rising edge (low->high)
-			bis.b	#BIT1, &P4IE			; assert local interrupt enable
-
-			bic.b	#11111111b, &P2IFG		; clear interrupt flags on P2
-			bic.b   #BIT3, &P2IES			; set as rising edge (low->high)
-			bis.b	#BIT3, &P2IE			; assert local interrupt enable
-
-			bis.w	#GIE, SR				; assert global interrupt flag
-
-			bic.b	#LOCKLPM5, &PM5CTL0		; disable DIO low-power default
-
+			mov.w	#00000h, R4
+			mov.w	#02000h, R5
 main:
-			mov.w	#06h, R5
 
-			jmp 	main
+			mov.w	#010h, R4				; init R6 to 16d in hex
+push_loop:
+			dec		R4
+			push 	@R5+
+			cmp		#00h, R4				; compare R4 to 0
+			jnz		push_loop				; if R4 is not 0 then continue iterating
+push_loop_end:
+			mov.w	#010h, R4				; init R6 to 16d in hex
+			mov.w	#02000h, R5
+			jmp		pop_loop
+pop_loop:
+			dec		R4
+			pop 	0(R5)
+			call	#add_3
+			incd	R5
+			cmp		#00h, R4				; compare R4 to 0
+			jnz		pop_loop				; if R4 is not 0 then continue iterating
+pop_loop_end:
+			mov.w	#00000h, R4
+			mov.w	#02000h, R5
+			jmp		end_main
+end_main:
+			jmp		main
 			nop
-;-------------- END MAIN --------------
 
 ;-------------------------------------------------------------------------------
 ; Subroutines
 ;-------------------------------------------------------------------------------
-delay:
-
+add_3:
+			add.w	#03h, 0(R5)
 			ret
-;-------------- END delay --------------
 
-;-------------------------------------------------------------------------------
-; Interrupt Service Routines
-;-------------------------------------------------------------------------------
-
-; Service SW1
-press_SW_1:
-
-			bic.b	#BIT1, &P4IFG
-     		reti
-;-------------- END press_SW_1 --------------
-
-; Service SW2
-release_SW_2:
-
-			bic.b	#BIT3, &P2IFG
-			reti
-;-------------- END release_SW_2 --------------
 
 ;-------------------------------------------------------------------------------
 ; Memory Allocation
@@ -125,8 +98,3 @@ DataBlock:	.short	00000h, 01111h, 02222h, 03333h, 04444h, 05555h, 06666h, 07777h
             .sect   ".reset"                ; MSP430 RESET Vector
             .short  RESET
             
-            .sect 	".int22"
-            .short	press_SW_1
-
-            .sect 	".int24"
-            .short	release_SW_2
