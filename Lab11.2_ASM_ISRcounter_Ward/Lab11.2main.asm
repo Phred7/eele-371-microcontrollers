@@ -52,11 +52,11 @@ init:
 			mov.b	#000h, &P1SEL0			; ensures default selection
 			mov.b	#000h, &P1SEL1			; ensures default selection
 
-			mov.w	#0000h, &P3SEL0			; def P3.0:P3.3 as input
-			mov.w	#0000h, &P3SEL1
-			mov.w	#0000h, &P3DIR
-			bis.b	#00001111b, &P3REN
-			bic.b	#00001111b, &P3OUT
+			bis.b	#00001111b, &P3DIR		; set P3.0:P3.3 as output. Ident.
+			bic.b	#00001111b, &P3OUT		; set init vals to 0
+			bic.b	#00001111b, &P3REN		; ensures REN disabled
+			mov.b	#0000h, &P3SEL0			; ensures default selection
+			mov.b	#0000h, &P3SEL1			; ensures default selection
 
 			bic.b	#11111111b, &P4IFG		; clear interrupt flags on P4
 			bic.b   #BIT1, &P4IES			; set as rising edge (low->high)
@@ -66,13 +66,16 @@ init:
 			bic.b   #BIT3, &P2IES			; set as rising edge (low->high)
 			bis.b	#BIT3, &P2IE			; assert local interrupt enable
 
-			bis.w	#GIE, SR				; assert global interrupt flag
+			nop
+			eint							; assert global interrupt flag
+			nop
 
 			bic.b	#LOCKLPM5, &PM5CTL0		; disable DIO low-power default
+			bic.b	#00001111b, &P3OUT
 
 main:
-			mov.w	#06h, R5
-
+			xor.b	#BIT6, &P6OUT			; toggle on LED2 (Green)
+			call	#long_delay
 			jmp 	main
 			nop
 ;-------------- END MAIN --------------
@@ -80,8 +83,28 @@ main:
 ;-------------------------------------------------------------------------------
 ; Subroutines
 ;-------------------------------------------------------------------------------
-delay:
 
+blink_red:
+			bis.b	#BIT0, &P1OUT
+			call	#delay
+			bic.b	#BIT0, &P1OUT
+			ret
+
+long_delay:
+			mov.w	#06h, R5
+long_for:
+			dec		R5
+			call	#delay
+			cmp		#00h, R5				; compare R5 to 0
+			jnz		long_for				; if R5 is not 0 then continue iterating
+			ret
+;-------------- END delay --------------
+
+delay:
+			mov.w	#0FFFFh, R4
+delay_dec:	dec		R4
+			cmp		#00h, R4
+			jnz		delay_dec
 			ret
 ;-------------- END delay --------------
 
@@ -90,18 +113,34 @@ delay:
 ;-------------------------------------------------------------------------------
 
 ; Service SW1
-press_SW_1:
-
-			bic.b	#BIT1, &P4IFG
+SW_1_inc_counter:
+			mov.b	&P3OUT, R6
+			cmp.b	#1111b, R6
+			jl		SW_1_con				; if R6 is less than 1111b then do not blink red
+			mov.w	R5, R12
+			call	#blink_red
+			mov.w	R12, R5
+			jmp		SW_1_end
+SW_1_con:	inc		R6
+			mov.b	R6, &P3OUT
+SW_1_end:	bic.b	#BIT1, &P4IFG
      		reti
-;-------------- END press_SW_1 --------------
+;-------------- END SW_1_inc_counter --------------
 
 ; Service SW2
-release_SW_2:
-
-			bic.b	#BIT3, &P2IFG
+SW_2_dec_counter:
+			mov.b	&P3OUT, R6
+			cmp.b	#02h, R6
+			jge		SW_2_con				; if R6 is less than 0010b then do not blink red
+			mov.w	R5, R12
+			call	#blink_red
+			mov.w	R12, R5
+			jmp		SW_2_end
+SW_2_con:	decd	R6
+			mov.b	R6, &P3OUT
+SW_2_end:	bic.b	#BIT3, &P2IFG
 			reti
-;-------------- END release_SW_2 --------------
+;-------------- END SW_2_dec_counter --------------
 
 ;-------------------------------------------------------------------------------
 ; Memory Allocation
@@ -126,7 +165,7 @@ DataBlock:	.short	00000h, 01111h, 02222h, 03333h, 04444h, 05555h, 06666h, 07777h
             .short  RESET
             
             .sect 	".int22"
-            .short	press_SW_1
+            .short	SW_1_inc_counter
 
             .sect 	".int24"
-            .short	release_SW_2
+            .short	SW_2_dec_counter
