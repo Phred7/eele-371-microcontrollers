@@ -1,9 +1,11 @@
+/** W. Ward
+ *  10/20/2021
+ *  DIO Polling w/ Interrupts
+ */
+
 #include <msp430.h> 
 
 
-/**
- * main.c
- */
 int count = 0;
 
 int main(void)

@@ -2,8 +2,8 @@
 ; MSP430 Assembler Code Template for use with TI Code Composer Studio
 ; Walker Ward
 ; EELE371
-; 10/19/2021
-; Timers: PWM LED dimmer
+; 10/27/2021
+; Timers
 ;
 ;-------------------------------------------------------------------------------
             .cdecls C,LIST,"msp430.h"       ; Include device header file
@@ -25,21 +25,8 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 
 ;-------------------------------------------------------------------------------
 ; Main loop here
-; 	R4 – DelayOnce counter
-; 	R6 – PWM time period (T)
-; 	R7 – PWM duty cycle (delta-t)
-;	R8 – minimum duty cycle allowed
-; 	R9 – maximum duty cycle allowed
-; 	R10 – duty cycle step size.
 ;-------------------------------------------------------------------------------
 init:
-			mov.w	#00h, R4
-			mov.w	#1000d, R6
-			mov.w	#100d, R7
-			mov.w	#100d, R8		; 10%
-			mov.w	#500d, R9		; 50%
-			mov.w	#25d, R10		; 2.5%
-
 			bis.b	#BIT6, &P6DIR			; set P6.6 as output - LED2 (green)
 			bic.b	#BIT6, &P6OUT			; set init val to 0
 			bic.b	#BIT6, &P6REN			; ensures REN disabled
@@ -75,8 +62,8 @@ init:
 			bis.w	#ID__1, &TB0CTL			; choose divider for D1 (D1 = 1)
 			bis.w	#TBIDEX__1, &TB0EX0		; choose divider for D2 (D2 = 1)
 
-			mov.w	R6, &TB0CCR0
-			mov.w	R7, &TB0CCR1
+			mov.w	1000, &TB0CCR0
+			mov.w	100, &TB0CCR1
 
 			; TIMER interrupts
 			bis.w	#CCIE, &TB0CCTL0
@@ -95,63 +82,7 @@ main:
 			jmp 	main
 			nop
 ;-------------- END MAIN --------------
-
-;-------------------------------------------------------------------------------
-; Subroutines
-;-------------------------------------------------------------------------------
-
-delay:
-			mov.w	#0FFFFh, R4
-delay_dec:	dec		R4
-			cmp		#00h, R4
-			jnz		delay_dec
-			ret
-;-------------- END delay --------------
-
-
-;-------------------------------------------------------------------------------
-; Interrupt Service Routines
-;-------------------------------------------------------------------------------
-; Service TB0_CCR0
-TimerB0_EndLow:
-			bic.b	#BIT0, &P1OUT
-			bic.w	#CCIFG, &TB0CCTL1
-			reti
-;-------------- END TimerB0_EndLow --------------
-
-; Service TB0_CCR1
-TimerB0_EndHigh:
-			mov.w	R7, &TB0CCR1
-			bis.b	#BIT0, &P1OUT
-			bic.w	#CCIFG, &TB0CCTL0
-			reti
-;-------------- END TimerB0_EndHigh --------------
-
-; Service SW1
-SW_1_inc_delta_t:
-			cmp.w	R9, R7
-			jl		SW_1_con				; if R7 is less than R9 then dont increase duty cycle
-			bis.b	#BIT6, &P6OUT
-			call	#delay
-			bic.b	#BIT6, &P6OUT
-			jmp		SW_1_end
-SW_1_con:	add.w	R10, R7
-SW_1_end:	bic.b	#BIT1, &P4IFG
-     		reti
-;-------------- END SW_1_inc_counter --------------
-
-; Service SW2
-SW_2_dec_delta_t:
-			cmp.w	R8, R7
-			jge		SW_2_con				; if R7 is g|e than R8 then dont decrease duty cycle
-			bis.b	#BIT6, &P6OUT
-			call	#delay
-			bic.b	#BIT6, &P6OUT
-			jmp		SW_2_end
-SW_2_con:	sub.w	R10, R7
-SW_2_end:	bic.b	#BIT3, &P2IFG
- 			reti
-;-------------- END SW_2_dec_counter --------------
+                                            
 
 ;-------------------------------------------------------------------------------
 ; Stack Pointer definition
@@ -165,14 +96,3 @@ SW_2_end:	bic.b	#BIT3, &P2IFG
             .sect   ".reset"                ; MSP430 RESET Vector
             .short  RESET
             
-            .sect	".int43"
-            .short	TimerB0_EndHigh
-
-            .sect	".int42"
-            .short	TimerB0_EndLow
-
-            .sect 	".int22"
-            .short	SW_1_inc_delta_t
-
-            .sect 	".int24"
-            .short	SW_2_dec_delta_t
