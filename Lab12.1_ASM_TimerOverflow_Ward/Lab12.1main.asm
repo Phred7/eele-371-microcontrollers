@@ -83,14 +83,14 @@ main:
 
 ; Service TB0
 TimerB0_1s:
-			xor.b	#BIT6, &P6OUT
+			xor.b	#BIT0, &P1OUT
 			bic.w	#TBIFG, &TB0CTL
 			reti
 ;-------------- END service_TB0 --------------
 
 ; Service TB1
 TimerB1_2s:
-			xor.b	#BIT0, &P1OUT
+			xor.b	#BIT6, &P6OUT
 			bic.w	#TBIFG, &TB1CTL
 			reti
 ;-------------- END service_TB1 --------------

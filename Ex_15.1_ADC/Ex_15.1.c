@@ -26,7 +26,7 @@ int main(void)
 	ADCCTL0 |= ADCSHT_2;            // Conversion Cycles = 16 (ADCSHT=10)
 	ADCCTL0 |= ADCON;               // Turn on ADC
 
-	ADCCTL1 |= ADCSSEL_2;          // ADC Clock Src = SMCLK
+	ADCCTL1 |= ADCSSEL_2;           // ADC Clock Src = SMCLK
 	ADCCTL1 |= ADCSHP;              // Sample signal source = sampling timer
 
 	ADCCTL2 &= ~ADCRES;             // Clear ADCRES from def. of ADCRES=01
@@ -35,6 +35,7 @@ int main(void)
 	ADCMCTL0 |= ADCINCH_2;          // ADC Input Channel = A2 (P1.2)
 
 	ADCIE |= ADCIE0;                // Enable ADC Conv Complete IRQ
+
 	__enable_interrupt();           // Enable Maskable IRQs
 
 	while(1) {
