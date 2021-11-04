@@ -12,9 +12,9 @@ unsigned int message_length;
 
 int main(void)
 {
-	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
-	
-	//-- 1. Put eUSCI_A1 into software reset
+    WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
+
+    //-- 1. Put eUSCI_A1 into software reset
     UCA1CTLW0 |= UCSWRST;
 
     //--2. Config eUSCI_A1
@@ -39,12 +39,12 @@ int main(void)
     P4DIR &= ~BIT1;             // Clear P4.1 (SW1) dir = in
     P4REN |= BIT1;              // Enable pull up/down res
     P4OUT |= BIT1;              // Make res pull up
-    P4IES &= ~BIT1;              // Config IRQ H->L
+    P4IES |= BIT1;              // Config IRQ H->L
 
     P2DIR &= ~BIT3;             // Clear P2.3 (SW2) dir = in
     P2REN |= BIT3;              // Enable pull up/down res
     P2OUT |= BIT3;              // Make res pull up
-    P2IES &= ~BIT3;              // Config IRQ H->L
+    P2IES |= BIT3;              // Config IRQ H->L
 
     //--3.1. Tx
     P4SEL1 &= ~BIT3;
@@ -107,8 +107,8 @@ __interrupt void ISR_Port2_SW2(void) {
 //-- End ISR_Port2_SW2
 
 #pragma vector = EUSCI_A1_VECTOR
-__interrupt void ISR_EUSCI_AL(void) {
-    if(position+1 == sizeof(message) || position == 6) { // || position == (last - 1)
+__interrupt void ISR_EUSCI_A1(void) {
+    if(position+1 == sizeof(message) || position == 6) { // dependent on sizeof(messsage) and name length/string
         UCA1IE &= ~UCTXCPTIE;
         int i;
         for(i=0; i<10000; i++){}
@@ -118,4 +118,5 @@ __interrupt void ISR_EUSCI_AL(void) {
     }
     UCA1IFG &= ~UCTXCPTIFG;
 }
-//-- End ISR_EUSCI_AL
+//-- End ISR_EUSCI_A1
+
