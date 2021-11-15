@@ -39,12 +39,12 @@ int main(void)
     P4DIR &= ~BIT1;             // Clear P4.1 (SW1) dir = in
     P4REN |= BIT1;              // Enable pull up/down res
     P4OUT |= BIT1;              // Make res pull up
-    P4IES |= BIT1;              // Config IRQ H->L
+    P4IES &= ~BIT1;              // Config IRQ H->L
 
     P2DIR &= ~BIT3;             // Clear P2.3 (SW2) dir = in
     P2REN |= BIT3;              // Enable pull up/down res
     P2OUT |= BIT3;              // Make res pull up
-    P2IES |= BIT3;              // Config IRQ H->L
+    P2IES &= ~BIT3;              // Config IRQ H->L
 
     //--3.1. UART A1 Tx
     P4SEL1 &= ~BIT3;
@@ -92,9 +92,10 @@ int main(void)
 #pragma vector = PORT4_VECTOR
 __interrupt void ISR_Port4_SW1(void) {
     position = 0;
+    UCA1TXBUF = message[position];
     UCA1IE |= UCTXCPTIE;
     UCA1IFG &= ~UCTXCPTIFG;
-    UCA1TXBUF = message[position];
+
 
     P4IFG &= ~BIT1;
 }
@@ -104,9 +105,9 @@ __interrupt void ISR_Port4_SW1(void) {
 #pragma vector = PORT2_VECTOR
 __interrupt void ISR_Port2_SW2(void) {
     position = last;
+    UCA1TXBUF = message[position];
     UCA1IE |= UCTXCPTIE;
     UCA1IFG &= ~UCTXCPTIFG;
-    UCA1TXBUF = message[position];
 
     P2IFG &= ~BIT3;
 }
