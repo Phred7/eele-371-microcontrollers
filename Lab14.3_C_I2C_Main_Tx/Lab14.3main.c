@@ -2,14 +2,14 @@
 
 /** W. Ward
  *  11/14/2021
- *  I2C
+ *  I2C Tx
  */
 
 int dataCnt = 0;
-char packet[] = { 0x03, 0x31, 0x10, 0x08, 0x14, 0x00, 0x11, 0x21 }; // 8:10:31 Sunday 11/14/'21
+char packet[] = { 0x03, 0x15, 0x26, 0x10, 0x14, 0x00, 0x11, 0x21 }; // 10:26:15 Sunday 11/14/'21//{ 0x03, 0x31, 0x10, 0x08, 0x14, 0x00, 0x11, 0x21 }; // 8:10:31 Sunday 11/14/'21
 
-int main(void)
- {
+int main(void){
+
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
 	
 	//-- Put eUSCI_B0 into sw reset
