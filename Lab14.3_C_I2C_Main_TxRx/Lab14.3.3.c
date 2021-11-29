@@ -48,7 +48,7 @@ int configSetDateTime(void) {
     return 0;
 }
 
-int configRx(void) {
+int configI2CRx(void) {
     //-- Put eUSCI_B0 into sw reset
     UCB0CTLW0 |= UCSWRST;
 
@@ -82,7 +82,7 @@ int configRx(void) {
     return 0;
 }
 
-int recieve(void) {
+int recieveI2C(void) {
     //-- Transmit Reg Addr with Write MSG
     UCB0TBCNT = 0x01;       // send 1 byte of data
     UCB0CTLW0 |= UCTR;      // put int o Tx mode
@@ -114,13 +114,13 @@ int main(void) {
         for(i=0; i<100; i=i+1){} //delay loop
     }
 
-    configRx();
+    configI2CRx();
 
     int j;
     for(j=0; j<1000; j++){}
 
     while(1){
-        recieve();
+        recieveI2C();
     }
 
     return 0;
