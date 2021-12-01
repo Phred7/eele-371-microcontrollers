@@ -92,22 +92,24 @@ int configI2CRx(void) {
 }
 
 int recieveI2C(void) {
-    //-- Transmit Reg Addr with Write MSG
-    UCB0TBCNT = 0x01;       // send 1 byte of data
-    UCB0CTLW0 |= UCTR;      // put int o Tx mode
-    UCB0CTLW0 |= UCTXSTT;   // generate START cond.
+    if(sw1Flag==1) {
+        //-- Transmit Reg Addr with Write MSG
+        UCB0TBCNT = 0x01;       // send 1 byte of data
+        UCB0CTLW0 |= UCTR;      // put int o Tx mode
+        UCB0CTLW0 |= UCTXSTT;   // generate START cond.
 
-    while ((UCB0IFG & UCSTPIFG) == 0 ); // wait for STOP
-        UCB0IFG &= ~UCSTPIFG;           // clear STOP flag
+        while ((UCB0IFG & UCSTPIFG) == 0 ); // wait for STOP
+            UCB0IFG &= ~UCSTPIFG;           // clear STOP flag
 
-    //--Recieve data from Rx
-    UCB0TBCNT = 0x07;           // rx 8 bytes of data
-    packet_in_index = 0;
-    UCB0CTLW0 &= ~UCTR;     // Put into Rx mode
-    UCB0CTLW0 |= UCTXSTT;   // Generate START cond.
+        //--Recieve data from Rx
+        UCB0TBCNT = 0x07;           // rx 8 bytes of data
+        packet_in_index = 0;
+        UCB0CTLW0 &= ~UCTR;     // Put into Rx mode
+        UCB0CTLW0 |= UCTXSTT;   // Generate START cond.
 
-    while ((UCB0IFG & UCSTPIFG) == 0 ); //wait for STOP
-        UCB0IFG &= ~UCSTPIFG;           // clear STOP flag
+        while ((UCB0IFG & UCSTPIFG) == 0 ); //wait for STOP
+            UCB0IFG &= ~UCSTPIFG;           // clear STOP flag
+        sw1Flag = 0;
     }
     return 0;
 }

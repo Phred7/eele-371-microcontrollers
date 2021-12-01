@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v20.2.5                     
 ******************************************************************************
->> Linked Tue Nov 16 01:05:33 2021
+>> Linked Mon Nov 29 12:05:02 2021
 
 OUTPUT FILE NAME:   <Lab14.3_C_I2C_Main_TxRx.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs_mpu"  address: 000083ee
@@ -112,11 +112,11 @@ section   page    origin      length       input sections
                   00008112    0000006a                            : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
                   0000817c    00000058     Lab14.3.3.obj (.text:main)
                   000081d4    00000056     Lab14.3.3.obj (.text:configSetDateTime)
-                  0000822a    00000054     Lab14.3.3.obj (.text:configRx)
+                  0000822a    00000054     Lab14.3.3.obj (.text:configI2CRx)
                   0000827e    00000040     rts430x_lc_sd_eabi.lib : cpy_util.asm.obj (.text:__memcpy_far)
                   000082be    0000003c     FRWP_INIT_LIB_CCS_msp430_large_code_small_data.lib : frwp_init.obj (.text:__mpu_init)
                   000082fa    0000003c     rts430x_lc_sd_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  00008336    0000003a     Lab14.3.3.obj (.text:recieve)
+                  00008336    0000003a     Lab14.3.3.obj (.text:recieveI2C)
                   00008370    00000006     rts430x_lc_sd_eabi.lib : exit.c.obj (.text:abort)
                   00008376    00000004                            : pre_init.c.obj (.text:_system_pre_init)
                   0000837a    00000002                            : startup.c.obj (.text:_system_post_cinit)
@@ -1265,7 +1265,7 @@ ffffffff  __c_args__
 0000837a  _system_post_cinit                     
 00008376  _system_pre_init                       
 00008370  abort                                  
-0000822a  configRx                               
+0000822a  configI2CRx                            
 000081d4  configSetDateTime                      
 00002010  dataCnt                                
 00008000  fram_rw_start                          
@@ -1276,7 +1276,7 @@ ffffffff  __c_args__
 00002008  packet_in                              
 00002014  packet_in_index                        
 00000001  program_fram_protection                
-00008336  recieve                                
+00008336  recieveI2C                             
 00000000  start_protection_offset_address        
 00002012  writeFlag                              
 
@@ -2213,11 +2213,11 @@ address   name
 00008112  __TI_auto_init_nobinit_nopinit_hold_wdt
 0000817c  main                                   
 000081d4  configSetDateTime                      
-0000822a  configRx                               
+0000822a  configI2CRx                            
 0000827e  __memcpy_far                           
 000082be  __mpu_init                             
 000082fa  __TI_decompress_none                   
-00008336  recieve                                
+00008336  recieveI2C                             
 00008370  C$$EXIT                                
 00008370  abort                                  
 00008376  _system_pre_init                       

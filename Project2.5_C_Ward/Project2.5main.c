@@ -1,4 +1,5 @@
 #include <msp430.h> 
+#include <stdio.h>
 
 /** W. Ward
  *  11/22/2021
@@ -13,11 +14,13 @@ int writeFlag = 1;
 int packet_in_index = 0;
 char packet_in[] = { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 };
 char packet[] = { 0x03, 0x15, 0x26, 0x12, 0x19, 0x05, 0x11, 0x21 }; // 12:26:15 Friday 11/19/'21
-char messageOpen[] = "\n\rGate is OPEN\r\n";//"OPEN ";
-char messageClosed[] = "\n\rGate is CLOSED\r\n";//"CLOSED ";
+char messageOpen[] = "\n\rGate was OPENED at: ";//"OPEN ";
+char messageClosed[] = "\n\rGate was CLOSED at: ";//"CLOSED ";
 char* message;
 int openTrigger = 0;
 int closedTrigger = 0;
+int seconds = 0;
+int sec_len = 0;
 unsigned int position;
 unsigned int message_length;
 int running = 0;
@@ -75,7 +78,7 @@ int configTimerB0CompareIRQ(void) {
 }
 //-- END configTimerB0CompareIRQ
 
-int configADCA4(void) {
+int configADCA6(void) {
     // ADC config
     ADCCTL0 &= ~ADCSHT;             // Clear ADCSHT from def. of ADCSHT=01
     ADCCTL0 |= ADCSHT_2;            // Conversion Cycles = 16 (ADCSHT=10)
@@ -85,14 +88,15 @@ int configADCA4(void) {
     ADCCTL1 |= ADCSHP;              // Sample signal source = sampling timer
 
     ADCCTL2 &= ~ADCRES;             // Clear ADCRES from def. of ADCRES=01
-    ADCCTL2 |= ADCRES_0;            // Resolution = 8-bit (ADCRES=00)
+    // ADCCTL2 |= ADCRES_0;            // Resolution = 8-bit (ADCRES=00)
+    ADCCTL2 |= ADCRES_2;            // Resolution = 12-bit (ADCRES=10)
 
-    ADCMCTL0 |= ADCINCH_4;          // ADC Input Channel = A4 (P1.4)
+    ADCMCTL0 |= ADCINCH_6;          // ADC Input Channel = A4 (P1.6)
 
     ADCIE |= ADCIE0;                // Enable ADC Conv Complete IRQ
     return 0;
 }
-//-- END configADCA4
+//-- END configADCA6
 
 int configSetDateTime(void) {
 
@@ -215,6 +219,7 @@ int setDateTime(void){
 //-- END setDateTime
 
 int openGate(void){
+    switch_triggered = 1;
     stepperPortsOff();
     while(1) {
         if(count < 4){
@@ -238,11 +243,18 @@ int openGate(void){
            }
         } else {
             stepperPortsOff();
+            switch_triggered = 0;
             break;
         }
     }
     return 0;
 }
+
+int convertSecCharToInt(char sec){
+    return 10;
+}
+//-- END convertSecCharToInt
+
 //-- END openGate
 int closeGate(void){
     // make it so that close counts backwards and and open counts forward.
@@ -253,9 +265,9 @@ int main(void)
 {
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
 
-    // Config P1.4 Pin for A4
-    P1SEL1 |= BIT4;
-    P1SEL0 |= BIT4;
+    // Config P1.6 Pin for A6
+    P1SEL1 |= BIT6;
+    P1SEL0 |= BIT6;
 
     initStepperDriverPorts();
     configUART();
@@ -263,7 +275,7 @@ int main(void)
     // Clear high-z
     PM5CTL0 &= ~LOCKLPM5;
 
-    configADCA4();
+    configADCA6();
     configTimerB0();
 
     // IRQs
@@ -289,10 +301,12 @@ int main(void)
 
     while(1) {
         ADCCTL0 |= ADCENC | ADCSC;      // Enable and Start conversion
+        //__bic_SR_register(GIE | LPM0_bits);
 
         while((ADCIFG & ADCIFG0) == 0); // wait for conv. complete
 
         if (ADC_Value <= 2925) {  // less than or equal to 2.3v 2854 (expected) error: ~+/- 50... ~.05v
+            delay(1000);
             // does not detect car
         }else if (ADC_Value > 2925) {   // greater than 2.3v
             // detects car
@@ -303,10 +317,30 @@ int main(void)
             // send gate open to security    (only send if gate was closed)
             UCA1IE |= UCTXCPTIE;
             UCA1IFG &= ~UCTXCPTIFG;
+            //sprintf(message, "Gate was OPENED at: %c\r\n", 0x15); //, packet_in[0]
+            // delay(100);
+//            char tens[] = ((0x15 & 0xF0)>>4);
+//            char ones[] = (0x15 & 0x0F);
+//            char number[] = strcat(tens, ones);
+//            char seconds[] = strcat(number, "\r\n");
+            //message = strcat("\n\r_", seconds);
             message = messageOpen;
             UCA1TXBUF = message[position];
             openTrigger = 1;
             while(openTrigger){}
+            seconds = 1;
+            UCA1TXBUF = ((packet_in[0] & 0xF0)>>4) + '0';    // Prints the 10s digit
+            delay(500);
+            seconds = 1;
+            UCA1TXBUF = (packet_in[0] & 0x0F) + '0';     // Prints the 1s digit
+            delay(500);
+            seconds = 1;
+            UCA1TXBUF = '\n';                           //  Newline character
+            delay(500);
+            seconds = 1;
+            UCA1TXBUF = '\r';                           // Carriage return (align-L)
+            delay(500);
+
 
             // open gate
             openGate();         // if opening and car is no longer detected stop opening and close the gate.
@@ -335,7 +369,9 @@ int main(void)
             // send gate closed to security
             UCA1IE |= UCTXCPTIE;
             UCA1IFG &= ~UCTXCPTIFG;
-            message = messageClosed;
+            //sprintf(message, "\n\rGate was Closed at: %c\r\n", packet_in[0]);
+            delay(100);
+            //message = messageClosed;
             UCA1TXBUF = message[position];
             closedTrigger = 1;
             while(closedTrigger){}
@@ -352,6 +388,7 @@ int main(void)
 // Service ADC
 #pragma vector=ADC_VECTOR
 __interrupt void ADC_ISR(void){
+    __bic_SR_register(GIE | LPM0_bits);
     ADC_Value = ADCMEM0;               // Read ADC value
 }
 //-- END ADC_ISR
@@ -415,7 +452,7 @@ __interrupt void  EUSCI_B0_I2C_ISR(void){
 #pragma vector = EUSCI_A1_VECTOR
 __interrupt void ISR_EUSCI_A1(void) {
     if(closedTrigger == 1){
-        if(position+1 == sizeof(messageClosed)) { // dependent on sizeof(messsage) and name length/string
+        if(position+1 == sizeof(messageClosed)+4) { // dependent on sizeof(messsage) and name length/string
             UCA1IE &= ~UCTXCPTIE;
             delay(20000);
             closedTrigger = 0;
@@ -436,7 +473,18 @@ __interrupt void ISR_EUSCI_A1(void) {
             position++;
             UCA1TXBUF = message[position];
         }
+    } else if (seconds == 1) {
+        UCA1IE &= ~UCTXCPTIE;
     }
+//        if(position+1 == sec_len) { // dependent on sizeof(messsage) and name length/string
+//            UCA1IE &= ~UCTXCPTIE;
+//            delay(20000);
+//            seconds = 0;
+//            position = 0;
+//        } else {
+//            position++;
+//            UCA1TXBUF = message[position];
+//        }
 
     UCA1IFG &= ~UCTXCPTIFG;
 }
