@@ -1,11 +1,8 @@
 #include <msp430.h> 
-//#include <stdio.h>
 
 /** W. Ward
- *  11/22/2021
- *  Project 2.5
- *
- *  2052 steps per rev. accoding to tech. details of product listing on adafruit.com
+ *  11/17/2021
+ *  Project 2.2
  */
 
 unsigned int ADC_Value;
@@ -20,7 +17,6 @@ char* message;
 int openTrigger = 0;
 int closedTrigger = 0;
 int seconds = 0;
-int sec_len = 0;
 unsigned int position;
 unsigned int message_length;
 int running = 0;
@@ -79,6 +75,7 @@ int configTimerB0CompareIRQ(void) {
 //-- END configTimerB0CompareIRQ
 
 int configADCA6(void) {
+    // from lab 15.1
     // ADC config
     ADCCTL0 &= ~ADCSHT;             // Clear ADCSHT from def. of ADCSHT=01
     ADCCTL0 |= ADCSHT_2;            // Conversion Cycles = 16 (ADCSHT=10)
@@ -91,7 +88,8 @@ int configADCA6(void) {
     // ADCCTL2 |= ADCRES_0;            // Resolution = 8-bit (ADCRES=00)
     ADCCTL2 |= ADCRES_2;            // Resolution = 12-bit (ADCRES=10)
 
-    ADCMCTL0 |= ADCINCH_6;          // ADC Input Channel = A4 (P1.6)
+//    ADCMCTL0 |= ADCINCH_4;          // ADC Input Channel = A2 (P1.2)
+    ADCMCTL0 |= ADCINCH_6;          // ADC Input Channel = A2 (P1.2)
 
     ADCIE |= ADCIE0;                // Enable ADC Conv Complete IRQ
     return 0;
@@ -167,18 +165,6 @@ int configI2CRx(void) {
     return 0;
 }
 //-- END configI2CRx
-
-int enableI2C(void){
-    UCB0IE |= UCTXIE0;          // Enable I2C Tx0 IRQ
-    UCB0IE |= UCRXIE0;          // Enable I2C Rx0 IRQ
-    return 0;
-}
-
-int disableI2C(void){
-    UCB0IE &= ~UCTXIE0;          // Enable I2C Tx0 IRQ
-    UCB0IE &= ~UCRXIE0;          // Enable I2C Rx0 IRQ
-    return 0;
-}
 
 int recieveI2C(void) {
     //-- Transmit Reg Addr with Write MSG
@@ -289,117 +275,56 @@ int closeGate(void){
     // make it so that close counts backwards and and open counts forward.
     return 0;
 }
+//-- END closeGate
+
+int enableI2C(void){
+    UCB0IE |= UCTXIE0;          // Enable I2C Tx0 IRQ
+    UCB0IE |= UCRXIE0;          // Enable I2C Rx0 IRQ
+    return 0;
+}
+
+int disableI2C(void){
+    UCB0IE &= ~UCTXIE0;          // Enable I2C Tx0 IRQ
+    UCB0IE &= ~UCRXIE0;          // Enable I2C Rx0 IRQ
+    return 0;
+}
 
 int main(void)
 {
-	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
+    WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
 
-	// port config
-	P1DIR |= BIT0;                  // Config P1.0 (LED1) as output
+    // port config
+    P1DIR |= BIT0;                  // Config P1.0 (LED1) as output
 
     // Config P1.6 Pin for A6
-    P1SEL1 |= BIT6;
+    P1SEL1 |= BIT6;                 // Config P1.2 Pin for A2
     P1SEL0 |= BIT6;
-
-    initStepperDriverPorts();
-    configUART();
 
     // Clear high-z
     PM5CTL0 &= ~LOCKLPM5;
 
     configADCA6();
-    configTimerB0();
 
     // IRQs
-    configTimerB0CompareIRQ();  // Overflow IRQ for CCR0 and CCR1
-    configSetDateTime();
+
     __enable_interrupt();
 
-    setDateTime();              // Transmit initial date/time
-
-    configI2CRx();
-
-    delay(1000);
-
-    // If ADC senses a car
-    // Open Gate:
-    //      Get time via I2C
-    //      Send to security via UART
-    //      Run stepper driver until open
-    //      Wait for car no longer be sensed by ADC
-    //      Run stepper driver until closed
-    //      Get time via I2C
-    //      Send to security via UART
-
+    disableI2C();
     while(1) {
-        disableI2C();
-        while(1){
+        ADCCTL0 |= ADCENC | ADCSC;      // Enable and Start conversion
+        // __bis_SR_register(GIE | LPM0_bits);     // put CPU to sleep???
 
-            ADCCTL0 |= ADCENC | ADCSC;      // Enable and Start conversion
+        while((ADCIFG & ADCIFG0) == 0); // wait for conv. complete
 
-            while((ADCIFG & ADCIFG0) == 0); // wait for conv. complete
-
-            if (ADC_Value <= 2925) {  // less than or equal to 2.3v 2854 (expected) error: ~+/- 50... ~.05v
-                P1OUT |= BIT0; // ON
-                // does not detect car
-            }else if (ADC_Value > 2925) {   // greater than 2.3v
-                // detects car
-                P1OUT &= ~BIT0;
-            }
+        if (ADC_Value <= 2925) {  // less than or equal to 2.3v 2854 (expected) error: ~+/- 50... ~.05v
+            P1OUT &= ~BIT0;             // LED1 = OFF
+        }else if (ADC_Value > 2925) {   // greater than 2.2v
+            P1OUT |= BIT0;              // LED1 = ON
+            break;
         }
-        enableI2C();
-            // get time and date
-//            recieveI2C();
-//
-//            // send gate open to security    (only send if gate was closed)
-//            UCA1IE |= UCTXCPTIE;
-//            UCA1IFG &= ~UCTXCPTIFG;
-//            message = messageOpen;
-//            UCA1TXBUF = message[position];
-//            openTrigger = 1;
-//            while(openTrigger){  delay(500); }
-//            sendSecondsViaUART();
-//
-//
-//            // open gate
-//            openGate();         // if opening and car is no longer detected stop opening and close the gate.
-//
-//            // wait for car to not be there anymore
-//            while(1){
-//                ADCCTL0 |= ADCENC | ADCSC;      // Enable and Start conversion
-//                //__bic_SR_register(GIE | LPM0_bits);
-//
-//                while((ADCIFG & ADCIFG0) == 0); // wait for conv. complete
-//
-//                if (ADC_Value <= 2925) {  // less than or equal to 2.3v 2854 (expected) error: ~+/- 50... ~.05v
-//                    // does not detect car
-//                    P1OUT &= ~BIT0;
-//                    break;
-//                }else if (ADC_Value > 2925) {   // greater than 2.3v
-//                    // detects car
-//                    P1OUT |= BIT0;
-//                }
-//            }
-//
-//            // close gate
-//            closeGate();    // (only send if gate was open (at all))
-//
-//            // get time and date
-//            recieveI2C();
-//
-//            // send gate closed to security
-//            UCA1IE |= UCTXCPTIE;
-//            UCA1IFG &= ~UCTXCPTIFG;
-//            message = messageClosed;
-//            UCA1TXBUF = message[position];
-//            closedTrigger = 1;
-//            while(closedTrigger){ delay(500); }
-//            sendSecondsViaUART();
-        delay(20000);
     }
-
-	return 0;
-
+    enableI2C();
+    return 0;
 }
 //-- END main
 
@@ -407,7 +332,7 @@ int main(void)
 // Service ADC
 #pragma vector=ADC_VECTOR
 __interrupt void ADC_ISR(void){
-    //__bic_SR_register(GIE | LPM0_bits);
+    // __bic_SR_register(GIE | LPM0_bits);     // wake up CPU
     ADC_Value = ADCMEM0;               // Read ADC value
 }
 //-- END ADC_ISR
@@ -495,17 +420,9 @@ __interrupt void ISR_EUSCI_A1(void) {
     } else if (seconds == 1) {
         UCA1IE &= ~UCTXCPTIE;
     }
-//        if(position+1 == sec_len) { // dependent on sizeof(messsage) and name length/string
-//            UCA1IE &= ~UCTXCPTIE;
-//            delay(20000);
-//            seconds = 0;
-//            position = 0;
-//        } else {
-//            position++;
-//            UCA1TXBUF = message[position];
-//        }
 
     UCA1IFG &= ~UCTXCPTIFG;
 }
 //-- END ISR_EUSCI_A1
+
 
