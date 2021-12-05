@@ -79,7 +79,7 @@ int configTimerB0(void) {
     TB0CTL |= CNTL_0;           // Length = 16-bit
     TB0CTL |= ID__8;        // ste d1 to 8
     TB0EX0 |= TBIDEX__7;    // set d2 to 7
-    TB0CCR0 = 18732;         // CCR0 = (1 s) w/ d2 = 7 1sec: 18732, .5sec = 9366 From pg 297 or TB
+    TB0CCR0 = 18732;         // CCR0 = (1 s) w/ d1 = 8 d2 = 7 1sec: 18732, .5sec = 9366 From pg 297 or TB
     return 0;
 }
 //-- END configTimerB0
