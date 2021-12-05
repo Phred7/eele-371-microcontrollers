@@ -408,7 +408,8 @@ int main(void)
 #pragma vector=ADC_VECTOR
 __interrupt void ADC_ISR(void){
     //__bic_SR_register(GIE | LPM0_bits);
-    ADC_Value = ADCMEM0;               // Read ADC value
+    ADC_Value = ADCMEM0;               // Read ADC value+
+    __bic_SR_register_on_exit(LPM0_bits | GIE); // Exit CPU, clear interrupts
 }
 //-- END ADC_ISR
 

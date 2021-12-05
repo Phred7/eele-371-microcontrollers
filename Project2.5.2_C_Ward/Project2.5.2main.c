@@ -2,7 +2,7 @@
 
 /** W. Ward
  *  11/17/2021
- *  Project 2.2
+ *  Project 2.5.2
  */
 
 unsigned int ADC_Value;
@@ -74,7 +74,7 @@ int configTimerB0CompareIRQ(void) {
 }
 //-- END configTimerB0CompareIRQ
 
-int configADCA6(void) {
+int configADCA4(void) {
     // from lab 15.1
     // ADC config
     ADCCTL0 &= ~ADCSHT;             // Clear ADCSHT from def. of ADCSHT=01
@@ -88,8 +88,9 @@ int configADCA6(void) {
     // ADCCTL2 |= ADCRES_0;            // Resolution = 8-bit (ADCRES=00)
     ADCCTL2 |= ADCRES_2;            // Resolution = 12-bit (ADCRES=10)
 
-//    ADCMCTL0 |= ADCINCH_4;          // ADC Input Channel = A2 (P1.2)
-    ADCMCTL0 |= ADCINCH_6;          // ADC Input Channel = A2 (P1.2)
+//    ADCMCTL0 |= ADCINCH_4;          // ADC Input Channel = A4 (P1.4)
+//    ADCMCTL0 |= ADCINCH_6;          // ADC Input Channel = A6 (P1.6)
+    ADCMCTL0 |= ADCINCH_7;          // ADC Input Channel = A7 (P1.7)
 
     ADCIE |= ADCIE0;                // Enable ADC Conv Complete IRQ
     return 0;
@@ -296,25 +297,46 @@ int main(void)
     // port config
     P1DIR |= BIT0;                  // Config P1.0 (LED1) as output
 
-    // Config P1.6 Pin for A6
-    P1SEL1 |= BIT6;                 // Config P1.2 Pin for A2
-    P1SEL0 |= BIT6;
+//    // Config P1.6 Pin for A6
+//    P1SEL1 |= BIT6;
+//    P1SEL0 |= BIT6;
+//
+//    // Config P1.4 Pin for A4
+//    P1SEL1 |= BIT4;
+//    P1SEL0 |= BIT4;
+
+    // Config P1.4 Pin for A7
+    P1SEL1 |= BIT7;
+    P1SEL0 |= BIT7;
+
+    initStepperDriverPorts();
+    configUART();
 
     // Clear high-z
     PM5CTL0 &= ~LOCKLPM5;
 
-    configADCA6();
+    configADCA4();
+    configTimerB0();
 
     // IRQs
-
+    configTimerB0CompareIRQ();  // Overflow IRQ for CCR0 and CCR1
+    configSetDateTime();
     __enable_interrupt();
 
-    disableI2C();
+    setDateTime();              // Transmit initial date/time
+
+    configI2CRx();
+
+    delay(1000);
+
+
+
+    //disableI2C();
     while(1) {
         ADCCTL0 |= ADCENC | ADCSC;      // Enable and Start conversion
         // __bis_SR_register(GIE | LPM0_bits);     // put CPU to sleep???
 
-        while((ADCIFG & ADCIFG0) == 0); // wait for conv. complete
+        while((ADCIFG & ADCIFG0) == 0) {  }  // wait for conv. complete //__bis_SR_register(CPUOFF + GIE);
 
         if (ADC_Value <= 2925) {  // less than or equal to 2.3v 2854 (expected) error: ~+/- 50... ~.05v
             P1OUT &= ~BIT0;             // LED1 = OFF
@@ -323,7 +345,57 @@ int main(void)
             break;
         }
     }
-    enableI2C();
+    //enableI2C();
+    recieveI2C();
+    //disableI2C();
+    // send gate open to security    (only send if gate was closed)
+    UCA1IE |= UCTXCPTIE;
+    UCA1IFG &= ~UCTXCPTIFG;
+    message = messageOpen;
+    UCA1TXBUF = message[position];
+    openTrigger = 1;
+    while(openTrigger){  delay(500); }
+    sendSecondsViaUART();
+
+
+    // open gate
+    openGate();         // if opening and car is no longer detected stop opening and close the gate.
+
+    // wait for car to not be there anymore
+    while(1){
+        ADCCTL0 |= ADCENC | ADCSC;      // Enable and Start conversion
+        //__bic_SR_register(GIE | LPM0_bits);
+
+        while((ADCIFG & ADCIFG0) == 0) { __bis_SR_register(LPM0_bits + GIE); } // wait for conv. complete
+
+        if (ADC_Value <= 2925) {  // less than or equal to 2.3v 2854 (expected) error: ~+/- 50... ~.05v
+            // does not detect car
+            P1OUT &= ~BIT0;
+            break;
+        }else if (ADC_Value > 2925) {   // greater than 2.3v
+            // detects car
+            P1OUT |= BIT0;
+        }
+    }
+
+    // close gate
+    closeGate();    // (only send if gate was open (at all))
+
+    // get time and date
+    //enableI2C();
+    recieveI2C();
+
+    // send gate closed to security
+    UCA1IE |= UCTXCPTIE;
+    UCA1IFG &= ~UCTXCPTIFG;
+    message = messageClosed;
+    UCA1TXBUF = message[position];
+    closedTrigger = 1;
+    while(closedTrigger){ delay(500); }
+    sendSecondsViaUART();
+
+
+
     return 0;
 }
 //-- END main
@@ -334,6 +406,7 @@ int main(void)
 __interrupt void ADC_ISR(void){
     // __bic_SR_register(GIE | LPM0_bits);     // wake up CPU
     ADC_Value = ADCMEM0;               // Read ADC value
+    //__bic_SR_register_on_exit(CPUOFF);
 }
 //-- END ADC_ISR
 

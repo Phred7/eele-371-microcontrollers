@@ -55,7 +55,7 @@ int main(void)
         ADCCTL0 |= ADCENC | ADCSC;      // Enable and Start conversion
         // __bis_SR_register(GIE | LPM0_bits);     // put CPU to sleep???
 
-        while((ADCIFG & ADCIFG0) == 0); // wait for conv. complete
+        while((ADCIFG & ADCIFG0) == 0) {}; // wait for conv. complete
 
         if (ADC_Value <= 2925) {  // less than or equal to 2.3v 2854 (expected) error: ~+/- 50... ~.05v
             P1OUT &= ~BIT0;             // LED1 = OFF
