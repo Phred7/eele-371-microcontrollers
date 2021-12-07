@@ -43,6 +43,7 @@ int timer_helper_counter = 0;
 int gate_direction = 0;
 int gate_is_open = 0;   // 1 means the gate is open
 int gate_is_closed = 1; // 1 means that the gate is closed
+int step_count = 3;     // 3 for full stepping 7 for half stepping
 
 // UART
 char messageOpen[] = "\n\rGate was OPENED at: ";//"OPEN ";
@@ -225,29 +226,30 @@ int openGate(void){
     gate_trigger = 1;
     timer_helper_counter = 0;
     TB0CCR0 = 91;//181;
+    step_count = 3;
     stepperPortsOff();
     while(1) {
         if(timer_helper_counter < 516){ // 1/4 # of steps to full
-           switch(active_coil){
-           case 0:
-               P3OUT &= ~BIT1;
-               P3OUT &= ~BIT2;
-               P3OUT &= ~BIT3;
-               P3OUT |= BIT0;
-               break;
-           case 1:
-               P3OUT &= ~BIT0;             // Init val = 0
-               P3OUT |= BIT1;
-               break;
-           case 2:
-               P3OUT &= ~BIT1;             // Init val = 0
-               P3OUT |= BIT2;
-               break;
-           case 3:
-               P3OUT &= ~BIT2;             // Init val = 0
-               P3OUT |= BIT3;             // Init val = 0
-               break;
-           }
+            switch(active_coil){
+            case 0:
+                P3OUT &= ~BIT1;
+                P3OUT &= ~BIT2;
+                P3OUT &= ~BIT3;
+                P3OUT |= BIT0;
+                break;
+            case 1:
+                P3OUT &= ~BIT0;             // Init val = 0
+                P3OUT |= BIT1;
+                break;
+            case 2:
+                P3OUT &= ~BIT1;             // Init val = 0
+                P3OUT |= BIT2;
+                break;
+            case 3:
+                P3OUT &= ~BIT2;             // Init val = 0
+                P3OUT |= BIT3;             // Init val = 0
+                break;
+            }
         } else {
             stepperPortsOff();
             gate_is_open = 1;
@@ -260,11 +262,14 @@ int openGate(void){
 }
 //-- END openGate
 
+int openGateHalfStepping(void);
+
 int closeGate(void){
     // drive stepper to close
     gate_trigger = 1;
     timer_helper_counter = 0;
     TB0CCR0 = 36;//73;
+    step_count = 3;
     stepperPortsOff();
     timer_helper_counter = 516;
     gate_direction = 1;
@@ -302,6 +307,8 @@ int closeGate(void){
     }
 }
 //-- END closeGate
+
+int closeGateHalfStepping(void);
 
 int main(void)
 {
@@ -505,7 +512,7 @@ int main(void)
 #pragma vector = TIMER0_B0_VECTOR
 __interrupt void ISR_TB0CCR0(void) {
     if(gate_trigger == 1){
-        if(active_coil >= 3){
+        if(active_coil >= step_count){
             active_coil = 0;
             if(gate_direction == 1){
                 timer_helper_counter--;
@@ -615,3 +622,61 @@ __interrupt void ISR_EUSCI_A1(void) {
     }
 }
 //-- END ISR_EUSCI_A1
+
+int openGateHalfStepping(void){
+
+    // drive stepper to open
+    gate_trigger = 1;
+    timer_helper_counter = 0;
+    TB0CCR0 = 91;//181;
+    step_count = 7;
+    stepperPortsOff();
+    while(1) {
+        if(timer_helper_counter < 516){ // 1/4 # of steps to full
+            switch(active_coil){
+            case 0:                     // only coil 0
+                P3OUT &= ~BIT1;
+                P3OUT &= ~BIT2;
+                P3OUT &= ~BIT3; // off
+                P3OUT |= BIT0;  // on
+                break;
+            case 1:                     // coil 0 and 1
+                P3OUT |= BIT0;
+                P3OUT |= BIT1;
+                break;
+            case 2:                     // only coil 1
+                P3OUT &= ~BIT0;
+                P3OUT |= BIT1;
+                break;
+            case 3:                     // coil 1 and 2
+                P3OUT |= BIT1;
+                P3OUT |= BIT2;
+                break;
+            case 4:                     // only coil 2
+                P3OUT &= ~BIT1;
+                P3OUT |= BIT2;
+                break;
+            case 5:                     // coil 2 and 3
+                P3OUT |= BIT2;
+                P3OUT |= BIT3;
+                break;
+            case 6:                     // coil 3
+                P3OUT &= ~BIT2;
+                P3OUT |= BIT3;
+                break;
+            case 7:                     // coil 3 and 0
+                P3OUT |= BIT0;
+                P3OUT |= BIT3;
+                break;
+            }
+        } else {
+            stepperPortsOff();
+            gate_is_open = 1;
+            gate_is_closed = 0;
+            gate_trigger = 0;
+            TB0CCR0 = 18732;
+            return 0;
+        }
+    }
+}
+//-- END openGateHalfStepping
