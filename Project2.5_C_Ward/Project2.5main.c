@@ -267,7 +267,7 @@ int convertSecCharToInt(char sec){
 }
 //-- END convertSecCharToInt
 
-int sendSecondsViaUART(void){
+int sendTimeViaUART(void){
     seconds = 1;
     UCA1TXBUF = ((packet_in[0] & 0xF0)>>4) + '0';    // Prints the 10s digit
     delay(500);

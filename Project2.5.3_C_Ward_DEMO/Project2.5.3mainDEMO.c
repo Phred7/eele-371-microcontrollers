@@ -62,12 +62,84 @@ int stepperPortsOff(void) {
 //-- END stepperPortsOff
 
 int sendTimeViaUART(void){
+    delay(500);
+
+    //hours
+    seconds = 1;
+    UCA1TXBUF = ((packet_in[2] & 0xF0)>>4) + '0';    // Prints the 10s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = (packet_in[2] & 0x0F) + '0';     // Prints the 1s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = 58;    // colon
+    delay(500);
+
+    // minutes
+    seconds = 1;
+    UCA1TXBUF = ((packet_in[1] & 0xF0)>>4) + '0';    // Prints the 10s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = (packet_in[1] & 0x0F) + '0';     // Prints the 1s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = 58;    // colon
+    delay(500);
+
+    // seconds
     seconds = 1;
     UCA1TXBUF = ((packet_in[0] & 0xF0)>>4) + '0';    // Prints the 10s digit
     delay(500);
+
     seconds = 1;
     UCA1TXBUF = (packet_in[0] & 0x0F) + '0';     // Prints the 1s digit
     delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = 32;     // print space
+    delay(500);
+
+    // month
+    seconds = 1;
+    UCA1TXBUF = ((packet_in[5] & 0xF0)>>4) + '0';    // Prints the 10s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = (packet_in[5] & 0x0F) + '0';     // Prints the 1s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = 92;     // print slash
+    delay(500);
+
+    // day
+    seconds = 1;
+    UCA1TXBUF = ((packet_in[3] & 0xF0)>>4) + '0';    // Prints the 10s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = (packet_in[3] & 0x0F) + '0';     // Prints the 1s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = 92;     // print slash
+    delay(500);
+
+    // 2 digit yr
+    seconds = 1;
+    UCA1TXBUF = ((packet_in[6] & 0xF0)>>4) + '0';    // Prints the 10s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = (packet_in[6] & 0x0F) + '0';     // Prints the 1s digit
+    delay(500);
+
+
+    //pretty print chars
     seconds = 1;
     UCA1TXBUF = '\n';                           //  Newline character
     delay(500);
@@ -143,14 +215,16 @@ int openGate(void){
     // drive stepper to open
     gate_trigger = 1;
     timer_helper_counter = 0;
-    TB0CCR0 = 181;
+    TB0CCR0 = 91;//181;
     stepperPortsOff();
     while(1) {
         //timer_helper_counter = 2064;
         if(timer_helper_counter < 2064/4){ // change 12 to 1/4 # of steps to full
            switch(active_coil){
            case 0:
-               stepperPortsOff();
+               P3OUT &= ~BIT1;
+               P3OUT &= ~BIT2;
+               P3OUT &= ~BIT3;
                P3OUT |= BIT0;
                break;
            case 1:
@@ -181,14 +255,16 @@ int closeGate(void){
     // drive stepper to close
     gate_trigger = 1;
     timer_helper_counter = 0;
-    TB0CCR0 = 73;
+    TB0CCR0 = 36;//73;
     stepperPortsOff();
     while(1) {
         //timer_helper_counter = 2064;
         if(timer_helper_counter < 2064/4){ // change 12 to 1/4 # of steps to full
            switch(active_coil){
            case 0:
-               stepperPortsOff();
+               P3OUT &= ~BIT0;
+               P3OUT &= ~BIT1;
+               P3OUT &= ~BIT2;
                P3OUT |= BIT3;
                break;
            case 1:
@@ -341,7 +417,7 @@ int main(void)
                 break;
             }
         }
-
+//
         // send gate open to security via UART
         configI2CRx();                              // config I2C to recieve via I2C after initial transmission
         recieveI2C();
@@ -354,21 +430,23 @@ int main(void)
         while(open_gate){  delay(500); }
         sendTimeViaUART();
 
-        openGate();
+//        openGate();
         delay(20000);
-
-        while(1) {
-            ADCCTL0 |= ADCENC | ADCSC;              // Enable and Start conversion
-            __bis_SR_register(GIE | LPM0_bits);     // enable maskable interrupts and turn of cpu for LPM
-
-            if (ADC_Value < 61) {                   // is there a person?
-                P6OUT &= ~BIT6;                     // LED2 = OFF
-                break;
-            }else if (ADC_Value >= 61) {            // is there a car?
-                P6OUT |= BIT6;                      // LED2 = ON
-            }
-        }
-        closeGate();
+        delay(20000);
+        delay(20000);
+//
+//        while(1) {
+//            ADCCTL0 |= ADCENC | ADCSC;              // Enable and Start conversion
+//            __bis_SR_register(GIE | LPM0_bits);     // enable maskable interrupts and turn of cpu for LPM
+//
+//            if (ADC_Value < 61) {                   // is there a person?
+//                P6OUT &= ~BIT6;                     // LED2 = OFF
+//                break;
+//            }else if (ADC_Value >= 61) {            // is there a car?
+//                P6OUT |= BIT6;                      // LED2 = ON
+//            }
+//        }
+//        closeGate();
 
         // send gate closed to security via UART
         configI2CRx();
@@ -382,6 +460,8 @@ int main(void)
         while(close_gate){ delay(500); }
         sendTimeViaUART();
 
+        delay(20000);
+        delay(20000);
         delay(20000);
 
     }

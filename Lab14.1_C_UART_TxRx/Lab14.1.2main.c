@@ -134,6 +134,7 @@ __interrupt void ISR_EUSCI_A1(void) {
         }
         UCA1IFG &= ~UCTXCPTIFG;
     } else if (recieve == 1) {
+        int reciever = UCA1RXBUF;
         if (UCA1RXBUF == '1') {
             P1OUT ^= BIT0;      // Toggle LED1
         } else if (UCA1RXBUF == '2') {

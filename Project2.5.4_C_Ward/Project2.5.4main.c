@@ -15,6 +15,12 @@
  *  80mv <= person < 754mv
  *  754mv <= vehicle <= 2000mv
  *
+ *  516.096 steps per rev. accoding to tech. details of product listing on adafruit.com
+ *  therefore to rotate 4 revolutions in 10 seconds requires:
+ *  step-T: (18732*20sec)/2064steps: CCR0 = 91
+ *  therefore to rotate 4 revolutions in 4 seconds requires:
+ *  step-T: (18732*8sec)/2064steps: CCR0 = 36
+ *  steps: 2064
  *
  */
 
@@ -62,12 +68,84 @@ int stepperPortsOff(void) {
 //-- END stepperPortsOff
 
 int sendTimeViaUART(void){
+    delay(500);
+
+    //hours
+    seconds = 1;
+    UCA1TXBUF = ((packet_in[2] & 0xF0)>>4) + '0';    // Prints the 10s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = (packet_in[2] & 0x0F) + '0';     // Prints the 1s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = 58;    // colon
+    delay(500);
+
+    // minutes
+    seconds = 1;
+    UCA1TXBUF = ((packet_in[1] & 0xF0)>>4) + '0';    // Prints the 10s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = (packet_in[1] & 0x0F) + '0';     // Prints the 1s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = 58;    // colon
+    delay(500);
+
+    // seconds
     seconds = 1;
     UCA1TXBUF = ((packet_in[0] & 0xF0)>>4) + '0';    // Prints the 10s digit
     delay(500);
+
     seconds = 1;
     UCA1TXBUF = (packet_in[0] & 0x0F) + '0';     // Prints the 1s digit
     delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = 32;     // print space
+    delay(500);
+
+    // month
+    seconds = 1;
+    UCA1TXBUF = ((packet_in[5] & 0xF0)>>4) + '0';    // Prints the 10s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = (packet_in[5] & 0x0F) + '0';     // Prints the 1s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = 92;     // print slash
+    delay(500);
+
+    // day
+    seconds = 1;
+    UCA1TXBUF = ((packet_in[3] & 0xF0)>>4) + '0';    // Prints the 10s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = (packet_in[3] & 0x0F) + '0';     // Prints the 1s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = 92;     // print slash
+    delay(500);
+
+    // 2 digit yr
+    seconds = 1;
+    UCA1TXBUF = ((packet_in[6] & 0xF0)>>4) + '0';    // Prints the 10s digit
+    delay(500);
+
+    seconds = 1;
+    UCA1TXBUF = (packet_in[6] & 0x0F) + '0';     // Prints the 1s digit
+    delay(500);
+
+
+    //pretty print chars
     seconds = 1;
     UCA1TXBUF = '\n';                           //  Newline character
     delay(500);
@@ -143,14 +221,15 @@ int openGate(void){
     // drive stepper to open
     gate_trigger = 1;
     timer_helper_counter = 0;
-    TB0CCR0 = 181;
+    TB0CCR0 = 91;//181;
     stepperPortsOff();
     while(1) {
-        //timer_helper_counter = 2064;
-        if(timer_helper_counter < 2064/4){ // change 12 to 1/4 # of steps to full
+        if(timer_helper_counter < 516){ // 1/4 # of steps to full
            switch(active_coil){
            case 0:
-               stepperPortsOff();
+               P3OUT &= ~BIT1;
+               P3OUT &= ~BIT2;
+               P3OUT &= ~BIT3;
                P3OUT |= BIT0;
                break;
            case 1:
@@ -177,18 +256,20 @@ int openGate(void){
 //-- END openGate
 
 int closeGate(void){
-
     // drive stepper to close
     gate_trigger = 1;
     timer_helper_counter = 0;
-    TB0CCR0 = 73;
+    TB0CCR0 = 36;//73;
     stepperPortsOff();
+    timer_helper_counter = 516;
+    gate_direction = 1;
     while(1) {
-        //timer_helper_counter = 2064;
-        if(timer_helper_counter < 2064/4){ // change 12 to 1/4 # of steps to full
+        if(timer_helper_counter >= 0){ // 1/4 # of steps to full
            switch(active_coil){
            case 0:
-               stepperPortsOff();
+               P3OUT &= ~BIT0;
+               P3OUT &= ~BIT1;
+               P3OUT &= ~BIT2;
                P3OUT |= BIT3;
                break;
            case 1:
@@ -208,6 +289,7 @@ int closeGate(void){
             stepperPortsOff();
             TB0CCR0 = 18732;
             gate_trigger = 0;
+            gate_direction = 0;
             return 0;
         }
     }
@@ -398,7 +480,12 @@ __interrupt void ISR_TB0CCR0(void) {
     if(gate_trigger == 1){
         if(active_coil >= 3){
             active_coil = 0;
-            timer_helper_counter++;
+            if(gate_direction == 1){
+                timer_helper_counter--;
+            } else {
+                timer_helper_counter++;
+            }
+
         } else {
             active_coil++;
         }
