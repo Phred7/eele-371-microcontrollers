@@ -2,7 +2,7 @@
 
 /** W. Ward
  *  12/02/2021
- *  Project 2.5.3
+ *  Project 2.5.4 (Challenge 9)
  *
  *  516.096 steps per rev. accoding to tech. details of product listing on adafruit.com
  *  therefore to rotate 4 revolutions in 20 seconds requires:
@@ -41,6 +41,8 @@ int close_gate = 0;
 int active_coil = 0;
 int timer_helper_counter = 0;
 int gate_direction = 0;
+int gate_is_open = 0;   // 1 means the gate is open
+int gate_is_closed = 1; // 1 means that the gate is closed
 
 // UART
 char messageOpen[] = "\n\rGate was OPENED at: ";//"OPEN ";
@@ -48,7 +50,8 @@ char messageClosed[] = "\n\rGate was CLOSED at: ";//"CLOSED ";
 char* message;
 int seconds = 0;
 unsigned int position;
-
+int securityOverrideClose = 0;
+int securityOverrideOpen = 0;
 
 int delay(int delay){
     int zzz;
@@ -247,6 +250,8 @@ int openGate(void){
            }
         } else {
             stepperPortsOff();
+            gate_is_open = 1;
+            gate_is_closed = 0;
             gate_trigger = 0;
             TB0CCR0 = 18732;
             return 0;
@@ -287,6 +292,8 @@ int closeGate(void){
            }
         } else {
             stepperPortsOff();
+            gate_is_open = 0;
+            gate_is_closed = 1;
             TB0CCR0 = 18732;
             gate_trigger = 0;
             gate_direction = 0;
@@ -332,6 +339,11 @@ int main(void)
     // Config UART Tx
     P4SEL1 &= ~BIT3;
     P4SEL0 |= BIT3;
+
+    // Config UART Rx
+    P4SEL1 &= ~BIT2;
+    P4SEL0 |= BIT2;
+
 
     // Take eUSCU_A1 out of software reset
     UCA1CTLW0 &= ~UCSWRST;
@@ -402,6 +414,9 @@ int main(void)
     // I2C IRQ
     UCB0IE |= UCTXIE0;          // Enable I2C Tx0 IRQ
 
+    // UART Rx
+    UCA1IE |= UCRXIE;
+
     __enable_interrupt();           // EN maskable IRQ
 
     //-- END IO configuration
@@ -409,6 +424,18 @@ int main(void)
     //-- main functionality
 
     setDateTime();                              // send initial date time to RTC via I2C
+
+    // while(1) {
+    //      get adc
+    //      if gate is open and no car then close the gate or if security overrides then close the gate
+    //      if gate is closed and car then open the gate or if security overrides then open the gate
+    //
+    //      add: if gate opening (in progress) and security overrides opening (to be closed) then stop and close the gate
+    //      add: if gate is closing (in progress) and security overrides closing (to be opened) then stop and open the gate
+    //
+    //      add: 1/2 step for stepper driver (togglable) ie. if this line is high then do half step otherwise do full stepping.
+    //
+    //      add: ADC properly scaled...
 
     while(1) {
 
@@ -534,32 +561,57 @@ __interrupt void  EUSCI_B0_I2C_ISR(void){
 //-- Service UART
 #pragma vector = EUSCI_A1_VECTOR
 __interrupt void ISR_EUSCI_A1(void) {
-    if(close_gate == 1){
-        if(position+1 == sizeof(messageClosed)) { // dependent on sizeof(messsage) and name length/string
-            UCA1IE &= ~UCTXCPTIE;
-            delay(20000);
-            close_gate = 0;
-            open_gate = 0;
-            position = 0;
-        } else {
-            position++;
-            UCA1TXBUF = message[position];
-        }
-    } else if (open_gate == 1) {
-        if(position+1 == sizeof(messageOpen)) { // dependent on sizeof(messsage) and name length/string
-            UCA1IE &= ~UCTXCPTIE;
-            delay(20000);
-            close_gate = 0;
-            open_gate = 0;
-            position = 0;
-        } else {
-            position++;
-            UCA1TXBUF = message[position];
-        }
-    } else if (seconds == 1) {
-        UCA1IE &= ~UCTXCPTIE;
-    }
+    int transmit;
+    transmit = UCA1IFG;
+    transmit &= UCTXCPTIFG; //8 on Tx
 
-    UCA1IFG &= ~UCTXCPTIFG;
+    int recieve;
+    recieve = UCA1IFG;
+    recieve &= UCRXIFG;
+
+    if(transmit == 8) {
+        if(close_gate == 1) {
+            if(position+1 == sizeof(messageClosed)) { // dependent on sizeof(messsage) and name length/string
+                UCA1IE &= ~UCTXCPTIE;
+                delay(20000);
+                close_gate = 0;
+                open_gate = 0;
+                position = 0;
+            } else {
+                position++;
+                UCA1TXBUF = message[position];
+            }
+        } else if (open_gate == 1) {
+            if(position+1 == sizeof(messageOpen)) { // dependent on sizeof(messsage) and name length/string
+                UCA1IE &= ~UCTXCPTIE;
+                delay(20000);
+                close_gate = 0;
+                open_gate = 0;
+                position = 0;
+            } else {
+                position++;
+                UCA1TXBUF = message[position];
+            }
+        } else if (seconds == 1) {
+            UCA1IE &= ~UCTXCPTIE;
+        }
+        UCA1IFG &= ~UCTXCPTIFG;
+    } else if (recieve == 1) {
+        int reciever = UCA1RXBUF;
+        if (UCA1RXBUF == 244) {
+            if (securityOverrideOpen == 0) {
+                securityOverrideOpen = 1;
+            } else {
+                securityOverrideOpen = 0;
+            }
+        } else if (UCA1RXBUF == 245) {
+            if (securityOverrideClose == 0) {
+                securityOverrideClose = 1;
+            } else {
+                securityOverrideClose = 0;
+            }
+        }
+        UCA1IFG &= ~UCRXIFG;
+    }
 }
 //-- END ISR_EUSCI_A1
