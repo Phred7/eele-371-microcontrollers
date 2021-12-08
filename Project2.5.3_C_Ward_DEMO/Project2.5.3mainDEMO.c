@@ -46,8 +46,8 @@ char messageClosed[] = "\n\rGate was CLOSED at: ";//"CLOSED ";
 char* message;
 int seconds = 0;
 unsigned int position;
-int securityOverrideClose = 0;
-int securityOverrideOpen = 0;
+int securityOverrideClose = 0; // if 1 then security has overridden to closed
+int securityOverrideOpen = 0; // if 1 then security has overridden to open
 
 int delay(int delay){
     int zzz;

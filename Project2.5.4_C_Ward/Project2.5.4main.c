@@ -52,8 +52,8 @@ char messageClosed[] = "\n\rGate was CLOSED at: ";//"CLOSED ";
 char* message;
 int seconds = 0;
 unsigned int position;
-int securityOverrideClose = 0;
-int securityOverrideOpen = 0;
+int securityOverrideClose = 0; // if 1 then security has overridden to closed
+int securityOverrideOpen = 0; // if 1 then security has overridden to open
 
 int delay(int delay){
     int zzz;
@@ -586,6 +586,74 @@ int main(void)
 
     setDateTime();                              // send initial date time to RTC via I2C
 
+    while(1) {
+
+        // check adc
+        while(1) {
+            ADCCTL0 |= ADCENC | ADCSC;              // Enable and Start conversion
+            __bis_SR_register(GIE | LPM0_bits);     // enable maskable interrupts and turn of cpu for LPM
+
+            if (ADC_Value < 61 || securityOverrideClose == 1) {                   // is there a person? x < 754mV
+                P6OUT &= ~BIT6;                     // LED2 = OFF
+                if (gate_is_open) {
+
+                    buzzer();
+                    if (half_stepping == 1) {
+                        closeGateHalfStepping();
+                    } else {
+                        closeGate();
+                    }
+
+                    // send gate closed to security via UART
+                    configI2CRx();
+                    recieveI2C();
+                    // send gate closed to security    (only send if gate was closed)
+                    UCA1IE |= UCTXCPTIE;
+                    UCA1IFG &= ~UCTXCPTIFG;
+                    message = messageClosed;
+                    UCA1TXBUF = message[position];
+                    close_gate = 1;
+                    while(close_gate){ delay(500); }
+                    sendTimeViaUART();
+
+                    delay(20000);
+
+                    if (securityOverrideClose == 1) {
+                        break;
+                    }
+                }
+            }else if (ADC_Value >= 61 || securityOverrideOpen == 1) {            // is there a car? x >= 754mV
+                P6OUT |= BIT6;                      // LED2 = ON
+                if (gate_is_closed == 1) {
+                    // send gate open to security via UART
+                    configI2CRx();                              // config I2C to recieve via I2C after initial transmission
+                    recieveI2C();
+                    // send gate open to security    (only send if gate was closed)
+                    UCA1IE |= UCTXCPTIE;
+                    UCA1IFG &= ~UCTXCPTIFG;
+                    message = messageOpen;
+                    UCA1TXBUF = message[position];
+                    open_gate = 1;
+                    while(open_gate){  delay(500); }
+                    sendTimeViaUART();
+
+                    buzzer();
+                    if (half_stepping == 1) {
+                        openGateHalfStepping();
+                    } else {
+                        openGate();
+                    }
+
+                    delay(20000);
+
+                    if (securityOverrideOpen == 1) {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     // while(1) {
     //      get adc
     //      if gate is open and no car then close the gate or if security overrides then close the gate
@@ -594,67 +662,65 @@ int main(void)
     //      add: if gate opening (in progress) and security overrides opening (to be closed) then stop and close the gate
     //      add: if gate is closing (in progress) and security overrides closing (to be opened) then stop and open the gate
     //
-    //      add: 1/2 step for stepper driver (togglable) ie. if this line is high then do half step otherwise do full stepping.
-    //
     //      add: ADC properly scaled...
 
-    while(1) {
-
-        while(1) {
-            ADCCTL0 |= ADCENC | ADCSC;              // Enable and Start conversion
-            __bis_SR_register(GIE | LPM0_bits);     // enable maskable interrupts and turn of cpu for LPM
-
-            if (ADC_Value < 61) {                   // is there a person? x < 754mV
-                P6OUT &= ~BIT6;                     // LED2 = OFF
-            }else if (ADC_Value >= 61) {            // is there a car? x >= 754mV
-                P6OUT |= BIT6;                      // LED2 = ON
-                break;
-            }
-        }
-
-        // send gate open to security via UART
-        configI2CRx();                              // config I2C to recieve via I2C after initial transmission
-        recieveI2C();
-        // send gate open to security    (only send if gate was closed)
-        UCA1IE |= UCTXCPTIE;
-        UCA1IFG &= ~UCTXCPTIFG;
-        message = messageOpen;
-        UCA1TXBUF = message[position];
-        open_gate = 1;
-        while(open_gate){  delay(500); }
-        sendTimeViaUART();
-
-        openGate();
-        delay(20000);
-
-        while(1) {
-            ADCCTL0 |= ADCENC | ADCSC;              // Enable and Start conversion
-            __bis_SR_register(GIE | LPM0_bits);     // enable maskable interrupts and turn of cpu for LPM
-
-            if (ADC_Value < 61) {                   // is there a person?
-                P6OUT &= ~BIT6;                     // LED2 = OFF
-                break;
-            }else if (ADC_Value >= 61) {            // is there a car?
-                P6OUT |= BIT6;                      // LED2 = ON
-            }
-        }
-        closeGate();
-
-        // send gate closed to security via UART
-        configI2CRx();
-        recieveI2C();
-        // send gate closed to security    (only send if gate was closed)
-        UCA1IE |= UCTXCPTIE;
-        UCA1IFG &= ~UCTXCPTIFG;
-        message = messageClosed;
-        UCA1TXBUF = message[position];
-        close_gate = 1;
-        while(close_gate){ delay(500); }
-        sendTimeViaUART();
-
-        delay(20000);
-
-    }
+//    while(1) {
+//
+//        while(1) {
+//            ADCCTL0 |= ADCENC | ADCSC;              // Enable and Start conversion
+//            __bis_SR_register(GIE | LPM0_bits);     // enable maskable interrupts and turn of cpu for LPM
+//
+//            if (ADC_Value < 61) {                   // is there a person? x < 754mV
+//                P6OUT &= ~BIT6;                     // LED2 = OFF
+//            }else if (ADC_Value >= 61) {            // is there a car? x >= 754mV
+//                P6OUT |= BIT6;                      // LED2 = ON
+//                break;
+//            }
+//        }
+//
+//        // send gate open to security via UART
+//        configI2CRx();                              // config I2C to recieve via I2C after initial transmission
+//        recieveI2C();
+//        // send gate open to security    (only send if gate was closed)
+//        UCA1IE |= UCTXCPTIE;
+//        UCA1IFG &= ~UCTXCPTIFG;
+//        message = messageOpen;
+//        UCA1TXBUF = message[position];
+//        open_gate = 1;
+//        while(open_gate){  delay(500); }
+//        sendTimeViaUART();
+//
+//        openGate();
+//        delay(20000);
+//
+//        while(1) {
+//            ADCCTL0 |= ADCENC | ADCSC;              // Enable and Start conversion
+//            __bis_SR_register(GIE | LPM0_bits);     // enable maskable interrupts and turn of cpu for LPM
+//
+//            if (ADC_Value < 61) {                   // is there a person?
+//                P6OUT &= ~BIT6;                     // LED2 = OFF
+//                break;
+//            }else if (ADC_Value >= 61) {            // is there a car?
+//                P6OUT |= BIT6;                      // LED2 = ON
+//            }
+//        }
+//        closeGate();
+//
+//        // send gate closed to security via UART
+//        configI2CRx();
+//        recieveI2C();
+//        // send gate closed to security    (only send if gate was closed)
+//        UCA1IE |= UCTXCPTIE;
+//        UCA1IFG &= ~UCTXCPTIFG;
+//        message = messageClosed;
+//        UCA1TXBUF = message[position];
+//        close_gate = 1;
+//        while(close_gate){ delay(500); }
+//        sendTimeViaUART();
+//
+//        delay(20000);
+//
+//    }
     //-- END main functionality
 
 	return 0;
