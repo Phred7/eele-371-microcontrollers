@@ -10,7 +10,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./Lab14.3.3.obj" \
+"./Lab14.3.3main.obj" \
 "../lnk_msp430fr2355.cmd" \
 $(GEN_CMDS__FLAG) \
 -lfrwp_init.a \
@@ -155,8 +155,8 @@ Lab14.3_C_I2C_Main_TxRx.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "Lab14.3.3.obj" 
-	-$(RM) "Lab14.3.3.d" 
+	-$(RM) "Lab14.3.3main.obj" 
+	-$(RM) "Lab14.3.3main.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

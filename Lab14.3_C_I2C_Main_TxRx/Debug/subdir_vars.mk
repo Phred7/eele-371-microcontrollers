@@ -9,21 +9,21 @@ CMD_SRCS += \
 ../lnk_msp430fr2355.cmd 
 
 C_SRCS += \
-../Lab14.3.3.c 
+../Lab14.3.3main.c 
 
 C_DEPS += \
-./Lab14.3.3.d 
+./Lab14.3.3main.d 
 
 OBJS += \
-./Lab14.3.3.obj 
+./Lab14.3.3main.obj 
 
 OBJS__QUOTED += \
-"Lab14.3.3.obj" 
+"Lab14.3.3main.obj" 
 
 C_DEPS__QUOTED += \
-"Lab14.3.3.d" 
+"Lab14.3.3main.d" 
 
 C_SRCS__QUOTED += \
-"../Lab14.3.3.c" 
+"../Lab14.3.3main.c" 
 
 

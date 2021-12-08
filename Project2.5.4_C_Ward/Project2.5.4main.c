@@ -45,6 +45,7 @@ int gate_is_open = 0;   // 1 means the gate is open
 int gate_is_closed = 1; // 1 means that the gate is closed
 int step_count = 3;     // 3 for full stepping 7 for half stepping
 int half_stepping = 0;  // 1 means half stepping enabled
+int gate_position = 0;  // the location of the gate with respect to tiomer_helper_counter if stopped by security
 
 // UART
 char messageOpen[] = "\n\rGate was OPENED at: ";//"OPEN ";
@@ -224,13 +225,26 @@ int recieveI2C(void) {
 int openGate(void){
 
     // drive stepper to open
+    gate_direction = 0;
     gate_trigger = 1;
-    timer_helper_counter = 0;
+    if (gate_position != 0 && securityOverrideOpen == 1) {
+        timer_helper_counter = gate_position;
+    } else {
+        timer_helper_counter = 0;
+    }
     TB0CCR0 = 91;//181;
     step_count = 3;
     stepperPortsOff();
     while(1) {
         if(timer_helper_counter < 516){ // 1/4 # of steps to full
+            if (securityOverrideClose == 1) {
+                stepperPortsOff();
+                gate_is_open = 1;
+                gate_is_closed = 0;
+                gate_trigger = 0;
+                TB0CCR0 = 18732;
+                return timer_helper_counter;
+            }
             switch(active_coil){
             case 0:
                 P3OUT &= ~BIT1;
@@ -255,6 +269,7 @@ int openGate(void){
             stepperPortsOff();
             gate_is_open = 1;
             gate_is_closed = 0;
+            gate_position = 0;
             gate_trigger = 0;
             TB0CCR0 = 18732;
             return 0;
@@ -263,43 +278,55 @@ int openGate(void){
 }
 //-- END openGate
 
-int openGateHalfStepping(void);
-
 int closeGate(void){
     // drive stepper to close
     gate_trigger = 1;
-    timer_helper_counter = 0;
+    if (gate_position != 0 && securityOverrideClose == 1) {
+        timer_helper_counter = gate_position;
+    } else {
+        timer_helper_counter = 516;
+    }
+
     TB0CCR0 = 36;//73;
     step_count = 3;
     stepperPortsOff();
-    timer_helper_counter = 516;
     gate_direction = 1;
     while(1) {
         if(timer_helper_counter >= 0){ // 1/4 # of steps to full
-           switch(active_coil){
-           case 0:
-               P3OUT &= ~BIT0;
-               P3OUT &= ~BIT1;
-               P3OUT &= ~BIT2;
-               P3OUT |= BIT3;
-               break;
-           case 1:
-               P3OUT &= ~BIT3;
-               P3OUT |= BIT2;
-               break;
-           case 2:
-               P3OUT &= ~BIT2;
-               P3OUT |= BIT1;
-               break;
-           case 3:
-               P3OUT &= ~BIT1;
-               P3OUT |= BIT0;
-               break;
-           }
+            if (securityOverrideOpen == 1) {
+                stepperPortsOff();
+                gate_is_open = 0;
+                gate_is_closed = 1;
+                gate_trigger = 0;
+                TB0CCR0 = 18732;
+                gate_direction = 0;
+                return timer_helper_counter;
+            }
+            switch(active_coil){
+            case 0:
+                P3OUT &= ~BIT0;
+                P3OUT &= ~BIT1;
+                P3OUT &= ~BIT2;
+                P3OUT |= BIT3;
+                break;
+            case 1:
+                P3OUT &= ~BIT3;
+                P3OUT |= BIT2;
+                break;
+            case 2:
+                P3OUT &= ~BIT2;
+                P3OUT |= BIT1;
+                break;
+            case 3:
+                P3OUT &= ~BIT1;
+                P3OUT |= BIT0;
+                break;
+            }
         } else {
             stepperPortsOff();
             gate_is_open = 0;
             gate_is_closed = 1;
+            gate_position = 0;
             TB0CCR0 = 18732;
             gate_trigger = 0;
             gate_direction = 0;
@@ -312,6 +339,7 @@ int closeGate(void){
 int openGateHalfStepping(void){
 
     // drive stepper to open
+    gate_direction = 0;
     gate_trigger = 1;
     timer_helper_counter = 0;
     TB0CCR0 = 45;//91;//181;
@@ -319,6 +347,15 @@ int openGateHalfStepping(void){
     stepperPortsOff();
     while(1) {
         if(timer_helper_counter < 516){ // 1/4 # of steps to full
+            if (securityOverrideClose == 1) {
+                stepperPortsOff();
+                gate_is_open = 1;
+                gate_is_closed = 0;
+                gate_trigger = 0;
+                step_count = 3;
+                TB0CCR0 = 18732;
+                return timer_helper_counter;
+            }
             switch(active_coil){
             case 0:                     // only coil 0
                 P3OUT &= ~BIT1;
@@ -359,7 +396,9 @@ int openGateHalfStepping(void){
             stepperPortsOff();
             gate_is_open = 1;
             gate_is_closed = 0;
+            gate_position = 0;
             gate_trigger = 0;
+            step_count = 3;
             TB0CCR0 = 18732;
             return 0;
         }
@@ -378,49 +417,61 @@ int closeGateHalfStepping(void){
     gate_direction = 1;
     while(1) {
         if(timer_helper_counter >= 0){ // 1/4 # of steps to full
-           switch(active_coil){
-           case 0:                     // only coil 3
-               P3OUT &= ~BIT0;
-               P3OUT &= ~BIT1;
-               P3OUT &= ~BIT2;
-               P3OUT |= BIT3;
-               break;
-           case 1:                     // coil 3 and 2
-               P3OUT |= BIT3;
-               P3OUT |= BIT2;
-               break;
-           case 2:                     // only coil 2
-               P3OUT &= ~BIT3;
-               P3OUT |= BIT2;
-               break;
-           case 3:                     // coil 2 and 1
-               P3OUT |= BIT2;
-               P3OUT |= BIT1;
-               break;
-           case 4:                     // only coil 1
-               P3OUT &= ~BIT2;
-               P3OUT |= BIT1;
-               break;
-           case 5:                     // coil 1 and 0
-               P3OUT |= BIT1;
-               P3OUT |= BIT0;
-               break;
-           case 6:                     // coil 0
-               P3OUT &= ~BIT1;
-               P3OUT |= BIT0;
-               break;
-           case 7:                     // coil 0 and 3
-               P3OUT |= BIT0;
-               P3OUT |= BIT3;
-               break;
-           }
+            if (securityOverrideOpen == 1) {
+                stepperPortsOff();
+                gate_is_open = 0;
+                gate_is_closed = 1;
+                gate_trigger = 0;
+                TB0CCR0 = 18732;
+                gate_direction = 0;
+                step_count = 3;
+                return timer_helper_counter;
+            }
+            switch(active_coil){
+            case 0:                     // only coil 3
+                P3OUT &= ~BIT0;
+                P3OUT &= ~BIT1;
+                P3OUT &= ~BIT2;
+                P3OUT |= BIT3;
+                break;
+            case 1:                     // coil 3 and 2
+                P3OUT |= BIT3;
+                P3OUT |= BIT2;
+                break;
+            case 2:                     // only coil 2
+                P3OUT &= ~BIT3;
+                P3OUT |= BIT2;
+                break;
+            case 3:                     // coil 2 and 1
+                P3OUT |= BIT2;
+                P3OUT |= BIT1;
+                break;
+            case 4:                     // only coil 1
+                P3OUT &= ~BIT2;
+                P3OUT |= BIT1;
+                break;
+            case 5:                     // coil 1 and 0
+                P3OUT |= BIT1;
+                P3OUT |= BIT0;
+                break;
+            case 6:                     // coil 0
+                P3OUT &= ~BIT1;
+                P3OUT |= BIT0;
+                break;
+            case 7:                     // coil 0 and 3
+                P3OUT |= BIT0;
+                P3OUT |= BIT3;
+                break;
+            }
        } else {
             stepperPortsOff();
             gate_is_open = 0;
             gate_is_closed = 1;
+            gate_position = 0;
             TB0CCR0 = 18732;
             gate_trigger = 0;
             gate_direction = 0;
+            step_count = 3;
             return 0;
         }
     }
@@ -457,7 +508,6 @@ int main(void)
 	WDTCTL = WDTPW | WDTHOLD;	    // stop watchdog timer
 
 	//-- IO configuration
-
     // port config
     P1DIR |= BIT0;                  // Config P1.0 (LED1) as output RED
     P6DIR |= BIT6;                  // Config P6.0 (LED2) as output GRN
@@ -593,15 +643,15 @@ int main(void)
             ADCCTL0 |= ADCENC | ADCSC;              // Enable and Start conversion
             __bis_SR_register(GIE | LPM0_bits);     // enable maskable interrupts and turn of cpu for LPM
 
-            if (ADC_Value < 61 || securityOverrideClose == 1) {                   // is there a person? x < 754mV
+            if ((ADC_Value < 61 || securityOverrideClose == 1) && securityOverrideOpen == 0) {                   // is there a person? x < 754mV
                 P6OUT &= ~BIT6;                     // LED2 = OFF
                 if (gate_is_open) {
 
                     buzzer();
                     if (half_stepping == 1) {
-                        closeGateHalfStepping();
+                        gate_position = closeGateHalfStepping();
                     } else {
-                        closeGate();
+                        gate_position = closeGate();
                     }
 
                     // send gate closed to security via UART
@@ -618,7 +668,23 @@ int main(void)
 
                     delay(20000);
 
-                    if (securityOverrideClose == 1) {
+                    if (securityOverrideOpen == 1) {
+                        if (gate_position != 0) {
+                            // send gate open to security via UART
+                            configI2CRx();                              // config I2C to recieve via I2C after initial transmission
+                            recieveI2C();
+                            // send gate open to security    (only send if gate was closed)
+                            UCA1IE |= UCTXCPTIE;
+                            UCA1IFG &= ~UCTXCPTIFG;
+                            message = messageOpen;
+                            UCA1TXBUF = message[position];
+                            open_gate = 1;
+                            while(open_gate){  delay(500); }
+                            sendTimeViaUART();
+
+                            buzzer();
+                            openGate();
+                        }
                         break;
                     }
                 }
@@ -639,19 +705,36 @@ int main(void)
 
                     buzzer();
                     if (half_stepping == 1) {
-                        openGateHalfStepping();
+                        gate_position = openGateHalfStepping();
                     } else {
-                        openGate();
+                        gate_position = openGate();
                     }
 
                     delay(20000);
 
-                    if (securityOverrideOpen == 1) {
+                    if (securityOverrideClose == 1) {
+                        if (gate_position != 0) {
+                            buzzer();
+                            closeGate();
+                            // send gate closed to security via UART
+                            configI2CRx();
+                            recieveI2C();
+                            // send gate closed to security    (only send if gate was closed)
+                            UCA1IE |= UCTXCPTIE;
+                            UCA1IFG &= ~UCTXCPTIFG;
+                            message = messageClosed;
+                            UCA1TXBUF = message[position];
+                            close_gate = 1;
+                            while(close_gate){ delay(500); }
+                            sendTimeViaUART();
+                            delay(20000);
+                        }
                         break;
                     }
                 }
             }
         }
+        while((securityOverrideOpen == 1) || (securityOverrideClose == 1)) { delay(500); __bis_SR_register(GIE | LPM0_bits); }
     }
 
     // while(1) {
@@ -664,63 +747,6 @@ int main(void)
     //
     //      add: ADC properly scaled...
 
-//    while(1) {
-//
-//        while(1) {
-//            ADCCTL0 |= ADCENC | ADCSC;              // Enable and Start conversion
-//            __bis_SR_register(GIE | LPM0_bits);     // enable maskable interrupts and turn of cpu for LPM
-//
-//            if (ADC_Value < 61) {                   // is there a person? x < 754mV
-//                P6OUT &= ~BIT6;                     // LED2 = OFF
-//            }else if (ADC_Value >= 61) {            // is there a car? x >= 754mV
-//                P6OUT |= BIT6;                      // LED2 = ON
-//                break;
-//            }
-//        }
-//
-//        // send gate open to security via UART
-//        configI2CRx();                              // config I2C to recieve via I2C after initial transmission
-//        recieveI2C();
-//        // send gate open to security    (only send if gate was closed)
-//        UCA1IE |= UCTXCPTIE;
-//        UCA1IFG &= ~UCTXCPTIFG;
-//        message = messageOpen;
-//        UCA1TXBUF = message[position];
-//        open_gate = 1;
-//        while(open_gate){  delay(500); }
-//        sendTimeViaUART();
-//
-//        openGate();
-//        delay(20000);
-//
-//        while(1) {
-//            ADCCTL0 |= ADCENC | ADCSC;              // Enable and Start conversion
-//            __bis_SR_register(GIE | LPM0_bits);     // enable maskable interrupts and turn of cpu for LPM
-//
-//            if (ADC_Value < 61) {                   // is there a person?
-//                P6OUT &= ~BIT6;                     // LED2 = OFF
-//                break;
-//            }else if (ADC_Value >= 61) {            // is there a car?
-//                P6OUT |= BIT6;                      // LED2 = ON
-//            }
-//        }
-//        closeGate();
-//
-//        // send gate closed to security via UART
-//        configI2CRx();
-//        recieveI2C();
-//        // send gate closed to security    (only send if gate was closed)
-//        UCA1IE |= UCTXCPTIE;
-//        UCA1IFG &= ~UCTXCPTIFG;
-//        message = messageClosed;
-//        UCA1TXBUF = message[position];
-//        close_gate = 1;
-//        while(close_gate){ delay(500); }
-//        sendTimeViaUART();
-//
-//        delay(20000);
-//
-//    }
     //-- END main functionality
 
 	return 0;
@@ -825,17 +851,22 @@ __interrupt void ISR_EUSCI_A1(void) {
         UCA1IFG &= ~UCTXCPTIFG;
     } else if (recieve == 1) {
         int reciever = UCA1RXBUF;
-        if (UCA1RXBUF == 244) {
-            if (securityOverrideOpen == 0) {
-                securityOverrideOpen = 1;
-            } else {
-                securityOverrideOpen = 0;
-            }
-        } else if (UCA1RXBUF == 245) {
+        __bic_SR_register_on_exit(LPM0_bits);
+        if (UCA1RXBUF == 244 || UCA1RXBUF == 49) {                         // 1 triggers open override // this value occasionally 244 or 49
             if (securityOverrideClose == 0) {
-                securityOverrideClose = 1;
-            } else {
-                securityOverrideClose = 0;
+                if (securityOverrideOpen == 0) {
+                    securityOverrideOpen = 1;
+                } else {
+                    securityOverrideOpen = 0;
+                }
+            }
+        } else if (UCA1RXBUF == 245 || UCA1RXBUF == 50) {                  // 2 triggers close override // this value occasionally 245 or 50
+            if (securityOverrideOpen == 0) {
+                if (securityOverrideClose == 0) {
+                    securityOverrideClose = 1;
+                } else {
+                    securityOverrideClose = 0;
+                }
             }
         }
         UCA1IFG &= ~UCRXIFG;

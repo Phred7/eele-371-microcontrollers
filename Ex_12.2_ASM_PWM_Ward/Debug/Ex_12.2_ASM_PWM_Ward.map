@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v20.2.5                     
 ******************************************************************************
->> Linked Tue Oct 19 23:07:33 2021
+>> Linked Wed Dec  8 01:01:14 2021
 
 OUTPUT FILE NAME:   <Ex_12.2_ASM_PWM_Ward.out>
 ENTRY POINT SYMBOL: "RESET"  address: 00008000
@@ -17,7 +17,7 @@ MEMORY CONFIGURATION
   TLVMEM                00001a00   00000200  00000000  00000200  RWIX
   BOOTCODE              00001c00   00000400  00000000  00000400  RWIX
   RAM                   00002000   00001000  00000000  00001000  RWIX
-  FRAM                  00008000   00007f80  00000090  00007ef0  RWIX
+  FRAM                  00008000   00007f80  00000076  00007f0a  RWIX
   JTAGSIGNATURE         0000ff80   00000004  00000004  00000000  RWIX  ffff 
   BSLSIGNATURE          0000ff84   00000004  00000004  00000000  RWIX  ffff 
   BSLCONFIGURATIONSIGNA 0000ff88   00000002  00000002  00000000  RWIX  ffff 
@@ -103,12 +103,12 @@ section   page    origin      length       input sections
 
 .const     0    00008000    00000000     UNINITIALIZED
 
-.text      0    00008000    00000088     
-                  00008000    00000088     Ex_12.2.obj (.text)
+.text      0    00008000    0000006e     
+                  00008000    0000006e     Ex_12.2.obj (.text)
 
 .text:_isr 
-*          0    00008088    00000008     
-                  00008088    00000008     rts430x_sc_sd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+*          0    0000806e    00000008     
+                  0000806e    00000008     rts430x_sc_sd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
 .stack     0    00003000    00000000     
 
@@ -218,9 +218,9 @@ MODULE SUMMARY
        Module             code   ro data   rw data
        ------             ----   -------   -------
     .\
-       Ex_12.2.obj        136    6         0      
+       Ex_12.2.obj        110    6         0      
     +--+------------------+------+---------+---------+
-       Total:             136    6         0      
+       Total:             110    6         0      
                                                   
     C:\ti\ccs1040\ccs\tools\compiler\ti-cgt-msp430_20.2.5.LTS\lib\rts430x_sc_sd_eabi.lib
        isr_trap.asm.obj   8      0         0      
@@ -250,7 +250,7 @@ MODULE SUMMARY
        Total:             8      44        0      
                                                   
     +--+------------------+------+---------+---------+
-       Grand Total:       144    50        0      
+       Grand Total:       118    50        0      
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -1166,7 +1166,7 @@ address   name
 000001cc  WDTCTL_L                       
 00003000  __STACK_END                    
 00000000  __STACK_SIZE                   
-00008088  __TI_ISR_TRAP                  
+0000806e  __TI_ISR_TRAP                  
 0000ffce  __TI_int22                     
 0000ffd0  __TI_int23                     
 0000ffd2  __TI_int24                     
@@ -2122,7 +2122,7 @@ address   name
 00008000  RESET                          
 00008000  fram_rw_start                  
 00008000  fram_rx_start                  
-00008088  __TI_ISR_TRAP                  
+0000806e  __TI_ISR_TRAP                  
 0000ffce  __TI_int22                     
 0000ffd0  __TI_int23                     
 0000ffd2  __TI_int24                     
