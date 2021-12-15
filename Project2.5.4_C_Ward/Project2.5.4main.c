@@ -17,7 +17,7 @@
  *
  *  516.096 steps per rev. accoding to tech. details of product listing on adafruit.com
  *  therefore to rotate 4 revolutions in 10 seconds requires:
- *  step-T: (18732*20sec)/2064steps: CCR0 = 91
+ *  step-T: (18732*20sec)/2064steps: CCR0 = 91 ie.
  *  therefore to rotate 4 revolutions in 4 seconds requires:
  *  step-T: (18732*8sec)/2064steps: CCR0 = 36
  *  steps: 2064
