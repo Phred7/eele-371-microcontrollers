@@ -43,7 +43,7 @@ init:
 			bis.w 	#TBIDEX__8, &TB0EX0		; choose divider for D2 (D2 = 8)
 
 			; TB0 interrupt: Compare
-			mov.w	#15625d, &TB0CCR0		; N = 15625: TB0 @ 0.5sec
+			mov.w	#32992d, &TB0CCR0		; N = 15625: TB0 @ 0.5sec
 			bis.w	#CCIE, &TB0CCTL0
 			bic.w	#CCIFG, &TB0CCTL0
 
@@ -91,8 +91,8 @@ TimerB0_ISR:
 					.data
 					.retain
 
-global_outer_delay:		.short	00002h
-global_inner_delay:		.short  08888h
+global_outer_delay:		.short	00005h ; 00005h + 0FFFFh
+global_inner_delay:		.short  0FFFFh
 
 ;-------------------------------------------------------------------------------
 ; Stack Pointer definition

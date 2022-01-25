@@ -4,7 +4,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.MSP430FR2355.ccxml.TI MSP430 USB1/MSP430" value="${build_artifact:Adv_Microcontrollers_Project_1_ASM_Ward}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.MSP430FR2355.ccxml.TI MSP430 USB1/MSP430" value="Adv_Microcontrollers_Project_1_ASM_Ward"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:Adv_Microcontrollers_Project_1_ASM_Ward}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.MSP430FR2355.ccxml.TI MSP430 USB1/MSP430" value="C:\Users\wward\Desktop\All Work\Code Resources\Workspaces\microcontrollers\Adv_Microcontrollers_Project_1_ASM_Ward\Debug\Adv_Microcontrollers_Project_1_ASM_Ward.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.MSP430FR2355.ccxml.TI MSP430 USB1/MSP430" value="C:\Users\wward\Documents\GitHub\eele-371-microcontrollers\Adv_Microcontrollers_Project_1_ASM_Ward\Debug\Adv_Microcontrollers_Project_1_ASM_Ward.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/Adv_Microcontrollers_Project_1_ASM_Ward"/>
 </listAttribute>
