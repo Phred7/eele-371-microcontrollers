@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Ex_8.2_ASM_C_constructs/main.asm&apos; to &apos;Ex_8.2.asm&apos;" description="Rename resource &apos;main.asm&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="main.asm" name="Ex_8.2.asm" stamp="1632715874008" updateReferences="true"/>
+</session>

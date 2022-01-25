@@ -1,0 +1,26 @@
+/*
+while:
+			mov.b	P5IN, R5
+			cmp 	#0001b, R5				; check to see if R5 is equal to 0001b
+			jnz		endWhile				; if R5 (P5IN) is not equal to 0001b
+			bis.b	#BIT6, &P6OUT			; turn on LED2 (Green)
+			mov.w	global_delay, R6
+			jmp		green_on_delay
+
+endWhile:
+			jmp		main
+			nop
+			*/
+
+/*
+green_on_delay:
+			dec		R6
+			jnz		green_on_delay			; if R6 is not =0  jump to whileDelayOn
+			bic.b	#BIT6, &P6OUT			; turn off LED2 (Green)
+			mov.w	global_delay, R6
+
+green_off_delay:
+			dec		R6
+			jnz		green_off_delay			; if R6 is not =0 jmp to whileDelayOff
+			jmp		while
+*/

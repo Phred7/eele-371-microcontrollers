@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Practical_13.1_C&apos; to &apos;Practical_13.1_Switching_to_C&apos;" description="Rename resource &apos;Practical_13.1_C&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Practical_13.1_C" name="Practical_13.1_Switching_to_C" stamp="1635789931526" updateReferences="true"/>&#x0A;<refactoring comment="Delete resource &apos;driverlib_test&apos;" deleteContents="true" description="Delete resource &apos;driverlib_test&apos;" element1="/driverlib_test" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1635963353829"/>
+</session>

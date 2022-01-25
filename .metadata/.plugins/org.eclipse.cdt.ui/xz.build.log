@@ -1,0 +1,205 @@
+
+**** Build of configuration Debug for project xz ****
+
+"C:\\ti\\ccs1040\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/crc.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/crc.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/crc.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/crc.c"
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/adc.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/adc.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/adc.c"
+"../driverlib/MSP430FR2xx_4xx/adc.c", line 141: remark #1528-D: (ULP 3.1) Detected flag polling using ADCBUSY. Recommend using an interrupt combined with enter LPMx and ISR
+Finished building: "../driverlib/MSP430FR2xx_4xx/adc.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/ecomp.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/ecomp.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/ecomp.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/ecomp.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/eusci_a_spi.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/eusci_a_spi.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/eusci_a_spi.c"
+"../driverlib/MSP430FR2xx_4xx/eusci_a_spi.c", line 38: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../driverlib/MSP430FR2xx_4xx/eusci_a_spi.c", line 74: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+Finished building: "../driverlib/MSP430FR2xx_4xx/eusci_a_spi.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/eusci_a_uart.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/eusci_a_uart.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/eusci_a_uart.c"
+"../driverlib/MSP430FR2xx_4xx/eusci_a_uart.c", line 23: remark #1535-D: (ULP 8.1) variable "retVal" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../driverlib/MSP430FR2xx_4xx/eusci_a_uart.c", line 87: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_a_uart.c", line 98: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_a_uart.c", line 206: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+Finished building: "../driverlib/MSP430FR2xx_4xx/eusci_a_uart.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/eusci_b_spi.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/eusci_b_spi.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/eusci_b_spi.c"
+"../driverlib/MSP430FR2xx_4xx/eusci_b_spi.c", line 38: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../driverlib/MSP430FR2xx_4xx/eusci_b_spi.c", line 72: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+Finished building: "../driverlib/MSP430FR2xx_4xx/eusci_b_spi.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/framctl.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/framctl.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/framctl.c"
+"../driverlib/MSP430FR2xx_4xx/framctl.c", line 29: remark #1535-D: (ULP 8.1) variable "wp" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../driverlib/MSP430FR2xx_4xx/framctl.c", line 61: remark #1535-D: (ULP 8.1) variable "wp" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../driverlib/MSP430FR2xx_4xx/framctl.c", line 93: remark #1535-D: (ULP 8.1) variable "wp" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../driverlib/MSP430FR2xx_4xx/framctl.c", line 127: remark #1535-D: (ULP 8.1) variable "wp" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+Finished building: "../driverlib/MSP430FR2xx_4xx/framctl.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/eusci_b_i2c.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c"
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 53: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 186: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 192: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 219: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 213: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 243: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 254: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 287: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 311: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 334: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 349: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 370: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 377: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 393: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 405: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 428: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 441: remark #1528-D: (ULP 3.1) Detected flag polling using UCTXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 477: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 474: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 503: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG. Recommend using an interrupt combined with enter LPMx and ISR
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 495: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c", line 540: remark #1528-D: (ULP 3.1) Detected flag polling using UCRXIFG0. Recommend using an interrupt combined with enter LPMx and ISR
+Finished building: "../driverlib/MSP430FR2xx_4xx/eusci_b_i2c.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/cs.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/cs.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/cs.c"
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 133: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 148: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 172: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 176: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 181: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 213: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 216: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 219: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 222: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 225: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 228: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 231: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 234: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 237: remark #1527-D: (ULP 2.1) Detected SW delay loop using __delay_cycles. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 242: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 292: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 601: remark #1535-D: (ULP 8.1) variable "dco_FLLD" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 703: remark #1535-D: (ULP 8.1) variable "dco_FLLD" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+"../driverlib/MSP430FR2xx_4xx/cs.c", line 822: remark #1535-D: (ULP 8.1) variable "dco_FLLD" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+Finished building: "../driverlib/MSP430FR2xx_4xx/cs.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/lcd_e.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/lcd_e.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/lcd_e.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/lcd_e.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/gpio.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/gpio.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/gpio.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/gpio.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/icc.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/icc.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/icc.c"
+"../driverlib/MSP430FR2xx_4xx/icc.c", line 35: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../driverlib/MSP430FR2xx_4xx/icc.c", line 44: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../driverlib/MSP430FR2xx_4xx/icc.c", line 53: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../driverlib/MSP430FR2xx_4xx/icc.c", line 62: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../driverlib/MSP430FR2xx_4xx/icc.c", line 77: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../driverlib/MSP430FR2xx_4xx/icc.c", line 85: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../driverlib/MSP430FR2xx_4xx/icc.c", line 93: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../driverlib/MSP430FR2xx_4xx/icc.c", line 101: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+Finished building: "../driverlib/MSP430FR2xx_4xx/icc.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/mpy32.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/mpy32.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/mpy32.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/mpy32.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/pmm.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/pmm.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/pmm.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/pmm.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/rtc.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/rtc.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/rtc.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/rtc.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/sfr.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/sfr.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/sfr.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/sfr.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/sac.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/sac.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/sac.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/sac.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/sysctl.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/sysctl.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/sysctl.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/sysctl.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/tia.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/tia.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/tia.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/tia.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/timer_a.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/timer_a.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/timer_a.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/timer_a.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/wdt_a.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/wdt_a.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/wdt_a.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/wdt_a.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/tlv.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/tlv.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/tlv.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/tlv.c"
+ 
+Building file: "../driverlib/MSP430FR2xx_4xx/timer_b.c"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/xz/driverlib/MSP430FR2xx_4xx" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="driverlib/MSP430FR2xx_4xx/timer_b.d_raw" --obj_directory="driverlib/MSP430FR2xx_4xx"  "../driverlib/MSP430FR2xx_4xx/timer_b.c"
+Finished building: "../driverlib/MSP430FR2xx_4xx/timer_b.c"
+ 
+Building target: "xz.out"
+Invoking: MSP430 Linker
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 -z -m"xz.map" --heap_size=160 --stack_size=160 --cinit_hold_wdt=on -i"C:/ti/ccs1040/ccs/ccs_base/msp430/include" -i"C:/ti/ccs1040/ccs/ccs_base/msp430/lib/FR2xx" -i"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/lib" -i"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --priority --reread_libs --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE --diag_wrap=off --display_error_number --warn_sections --xml_link_info="xz_linkInfo.xml" --use_hw_mpy=F5 --rom_model -o "xz.out" "./main.obj" "./driverlib/MSP430FR2xx_4xx/adc.obj" "./driverlib/MSP430FR2xx_4xx/crc.obj" "./driverlib/MSP430FR2xx_4xx/cs.obj" "./driverlib/MSP430FR2xx_4xx/ecomp.obj" "./driverlib/MSP430FR2xx_4xx/eusci_a_spi.obj" "./driverlib/MSP430FR2xx_4xx/eusci_a_uart.obj" "./driverlib/MSP430FR2xx_4xx/eusci_b_i2c.obj" "./driverlib/MSP430FR2xx_4xx/eusci_b_spi.obj" "./driverlib/MSP430FR2xx_4xx/framctl.obj" "./driverlib/MSP430FR2xx_4xx/gpio.obj" "./driverlib/MSP430FR2xx_4xx/icc.obj" "./driverlib/MSP430FR2xx_4xx/lcd_e.obj" "./driverlib/MSP430FR2xx_4xx/mpy32.obj" "./driverlib/MSP430FR2xx_4xx/pmm.obj" "./driverlib/MSP430FR2xx_4xx/rtc.obj" "./driverlib/MSP430FR2xx_4xx/sac.obj" "./driverlib/MSP430FR2xx_4xx/sfr.obj" "./driverlib/MSP430FR2xx_4xx/sysctl.obj" "./driverlib/MSP430FR2xx_4xx/tia.obj" "./driverlib/MSP430FR2xx_4xx/timer_a.obj" "./driverlib/MSP430FR2xx_4xx/timer_b.obj" "./driverlib/MSP430FR2xx_4xx/tlv.obj" "./driverlib/MSP430FR2xx_4xx/wdt_a.obj" "../lnk_msp430fr2355.cmd"  -lfrwp_init.a -llibc.a 
+<Linking>
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 3 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 4 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port A in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port B in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port C in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10422-D: (ULP 6.2) Detected use of a device with available 32-bit hardware multiplier and not also using MSPMATHLIB library (libmath.a).  Recommend using MSPMATHLIB library (libmath.a) for improved performance.
+Finished building target: "xz.out"
+ 
+
+**** Build Finished ****

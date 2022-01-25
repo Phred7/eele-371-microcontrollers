@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Ex_13.2_C_InteruptsTimers&apos; to &apos;Ex_13.2_C_InteruptsTimers_PWM&apos;" description="Rename resource &apos;Ex_13.2_C_InteruptsTimers&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Ex_13.2_C_InteruptsTimers" name="Ex_13.2_C_InteruptsTimers_PWM" stamp="1634786430200" updateReferences="true"/>
+</session>

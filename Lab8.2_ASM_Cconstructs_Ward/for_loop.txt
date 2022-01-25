@@ -1,0 +1,22 @@
+			mov.w	#03h, R5
+for:
+			dec		R5
+			bis.b	#BIT6, &P6OUT			; turn on LED2 (Green)
+			mov.w	global_delay, R6
+			jmp		green_on_delay
+for_mid:	cmp		#00h, R5				; compare R5 to 0
+			jnz		for						; if R5 is not 0 then continue iterating
+end_for:	jmp		main
+
+green_on_delay:
+			dec		R6
+			jnz		green_on_delay			; if R6 is not 0 continue decrementing
+			mov.w	global_delay, R6
+			bic.b	#BIT6, &P6OUT			; turn on LED2 (Green)
+			jmp		green_off_delay			; jump to green_off_delay
+
+green_off_delay:
+			dec		R6
+			jnz		green_off_delay			; if R6 is not 0 continue decrementing
+			bic.b	#BIT6, &P6OUT			; turn off LED2 (Green)
+			jmp		for_mid					; jmp to for_mid (for condition evaluation)

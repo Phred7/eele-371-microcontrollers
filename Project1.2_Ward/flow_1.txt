@@ -1,0 +1,33 @@
+main:
+			bis.b	#BIT1, R7
+			
+while:
+			mov.b	P2IN, R13
+			bit.b 	#BIT3, R13				; tests if the third bit in P2 (SW2) is asserted
+			jz		end_while				; if SW2 is not asserted then SW2 is pressed
+			jmp		r7_if					; jump to if statements
+w_cont:		jmp 	while					; jump to next iteration
+			
+			
+r7_if:		
+			bit.b	#BIT1, R7				; tests if the first bit of R7 is asserted. 
+			jz		sw1_if					; if R7.1 is 1 it follows that the last state of SW1 was not pressed
+			jmp 	w_con
+			
+sw1_if:
+			mov.b	P4IN, R13
+			bit.b	#BIT1, R13				; tests if the first bit in P4 (SW1) is asserted
+			jz		r7_z					; if SW1 is not pressed, set R7.1 to 1 and jump to next iteration
+			bic.b	#BIT1, R7				; set R7.1 to 0
+			jmp		r5_if		
+
+r5_if:
+
+w_else:
+
+r7_z:
+			bis.b	#BIT1, R7
+			jmp		w_cont
+	
+			
+end_while:

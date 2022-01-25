@@ -1,0 +1,8 @@
+
+**** Build of configuration Debug for project Lab13.2_C_Timers_Dimmer ****
+
+"C:\\ti\\ccs1040\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+gmake[1]: 'Lab13.2_C_Timers_Dimmer.out' is up to date.
+
+**** Build Finished ****

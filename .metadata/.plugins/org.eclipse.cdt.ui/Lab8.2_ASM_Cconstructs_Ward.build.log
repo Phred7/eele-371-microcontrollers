@@ -1,0 +1,8 @@
+
+**** Build of configuration Debug for project Lab8.2_ASM_Cconstructs_Ward ****
+
+"C:\\ti\\ccs1040\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+gmake[1]: 'Lab8.2_ASM_Cconstructs_Ward.out' is up to date.
+
+**** Build Finished ****

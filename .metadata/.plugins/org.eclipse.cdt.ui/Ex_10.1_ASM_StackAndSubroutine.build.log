@@ -1,0 +1,8 @@
+
+**** Build of configuration Debug for project Ex_10.1_ASM_StackAndSubroutine ****
+
+"C:\\ti\\ccs1040\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+gmake[1]: 'Ex_10.1_ASM_StackAndSubroutine.out' is up to date.
+
+**** Build Finished ****

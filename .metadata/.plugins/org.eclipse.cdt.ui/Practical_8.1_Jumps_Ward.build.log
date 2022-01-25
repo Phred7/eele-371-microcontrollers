@@ -1,0 +1,8 @@
+
+**** Build of configuration Debug for project Practical_8.1_Jumps_Ward ****
+
+"C:\\ti\\ccs1040\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+gmake[1]: 'Practical_8.1_Jumps_Ward.out' is up to date.
+
+**** Build Finished ****

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Lab7.1_ASM_ArithLogic-Instruct/main.asm&apos; to &apos;Lab7.1main.asm&apos;" description="Rename resource &apos;main.asm&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="main.asm" name="Lab7.1main.asm" stamp="1631504183249" updateReferences="true"/>
+</session>

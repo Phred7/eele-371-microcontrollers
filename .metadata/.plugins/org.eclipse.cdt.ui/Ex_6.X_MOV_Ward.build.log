@@ -1,0 +1,37 @@
+
+**** Build of configuration Debug for project Ex_6.X_MOV_Ward ****
+
+"C:\\ti\\ccs1040\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+Building file: "../ex_6_1.asm"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=small --data_model=small --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/Ex_6.X_MOV_Ward" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="ex_6_1.d_raw"  "../ex_6_1.asm"
+Finished building: "../ex_6_1.asm"
+ 
+Building file: "../ex_6_2.asm"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=small --data_model=small --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/Ex_6.X_MOV_Ward" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="ex_6_2.d_raw"  "../ex_6_2.asm"
+Finished building: "../ex_6_2.asm"
+ 
+Building file: "../ex_6_3.asm"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=small --data_model=small --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/Ex_6.X_MOV_Ward" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="ex_6_3.d_raw"  "../ex_6_3.asm"
+Finished building: "../ex_6_3.asm"
+ 
+Building target: "Ex_6.X_MOV_Ward.out"
+Invoking: MSP430 Linker
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=small --data_model=small --use_hw_mpy=F5 --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 -z -m"Ex_6.X_MOV_Ward.map" --heap_size=0 --stack_size=0 --cinit_hold_wdt=on -i"C:/ti/ccs1040/ccs/ccs_base/msp430/include" -i"C:/ti/ccs1040/ccs/ccs_base/msp430/lib/FR2xx" -i"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/lib" -i"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --priority --reread_libs --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE --diag_wrap=off --display_error_number --warn_sections --xml_link_info="Ex_6.X_MOV_Ward_linkInfo.xml" --entry_point=RESET --use_hw_mpy=F5 -o "Ex_6.X_MOV_Ward.out" "./ex_6_1.obj" "./ex_6_2.obj" "./ex_6_3.obj" "../lnk_msp430fr2355.cmd"  -lfrwp_init.a -llibc.a 
+<Linking>
+error #10056: symbol "RESET" redefined: first defined in "./ex_6_1.obj"; redefined in "./ex_6_2.obj"
+error #10056: symbol "RESET" redefined: first defined in "./ex_6_1.obj"; redefined in "./ex_6_3.obj"
+"../lnk_msp430fr2355.cmd", line 226: error #10099-D: program will not fit into available memory, or the section contains a call site that requires a trampoline that can't be generated for this section. placement with alignment fails for section ".reset" size 0x6.  Available memory ranges:
+   RESET        size: 0x2          unused: 0x2          max hole: 0x2       
+error #10010: errors encountered during linking; "Ex_6.X_MOV_Ward.out" not built
+ 
+>> Compilation failure
+makefile:144: recipe for target 'Ex_6.X_MOV_Ward.out' failed
+gmake[1]: *** [Ex_6.X_MOV_Ward.out] Error 1
+makefile:140: recipe for target 'all' failed
+gmake: *** [all] Error 2
+
+**** Build Finished ****

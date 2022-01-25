@@ -1,0 +1,33 @@
+
+**** Build of configuration Debug for project EX_12.1_ASM_Timers_Ward ****
+
+"C:\\ti\\ccs1040\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+Building file: "../Ex_12.1.asm"
+Invoking: MSP430 Compiler
+"C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/cl430" -vmspx --code_model=small --data_model=small --use_hw_mpy=F5 --include_path="C:/ti/ccs1040/ccs/ccs_base/msp430/include" --include_path="C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers/EX_12.1_ASM_Timers_Ward" --include_path="C:/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include" --advice:power=all --advice:hw_config=all --define=__MSP430FR2355__ --define=_FRWP_ENABLE --define=_INFO_FRWP_ENABLE -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --preproc_with_compile --preproc_dependency="Ex_12.1.d_raw"  "../Ex_12.1.asm"
+1 Assembly Error, 2 Assembly Warnings
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'Ex_12.1.obj' failed
+"../Ex_12.1.asm", WARNING! at line 42: [W0005] NOP required before set of GIE bit.
+				bis.w	#GIE, SR
+ 
+"../Ex_12.1.asm", REMARK   at line 42: [R0001] After symbol substitution the line became:
+				bis.w	#(0x0008), SR
+ 
+"../Ex_12.1.asm", WARNING! at line 42: [W0005] NOP required after set or clear of GIE bit.
+				bis.w	#GIE, SR
+ 
+"../Ex_12.1.asm", REMARK   at line 42: [R0001] After symbol substitution the line became:
+				bis.w	#(0x0008), SR
+ 
+"../Ex_12.1.asm", ERROR!   at EOF: [E0300] The following symbols are undefined:
+  TBSSELL_ACLK
+  PM5CLT0
+ 
+Errors in Source - Assembler Aborted
+gmake: *** [Ex_12.1.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****

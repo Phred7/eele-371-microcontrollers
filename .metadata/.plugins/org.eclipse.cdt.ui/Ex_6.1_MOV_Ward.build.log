@@ -1,0 +1,8 @@
+
+**** Build of configuration Debug for project Ex_6.1_MOV_Ward ****
+
+"C:\\ti\\ccs1040\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+gmake[1]: 'Ex_6.1_MOV_Ward.out' is up to date.
+
+**** Build Finished ****

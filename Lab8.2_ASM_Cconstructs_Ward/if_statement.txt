@@ -1,0 +1,34 @@
+if:
+			mov.b	P5IN, R5
+			cmp.w	#01h, R5
+			jnz		else_if_1					; if R5 is equal not equal to 01h, jump to elif_1
+
+			bic.b	#BIT0, &P1OUT				; disable LED1 (Red)
+			bis.b	#BIT6, &P6OUT				; turn on LED2 (Green)
+			mov.w	global_delay, R6
+			jmp		green_on_delay
+
+else_if_1:
+			cmp.w	#02h, R5
+			jnz		else_if_2					; if R5 is equal not equal to 02h, jump to elif_1
+
+			bis.b	#BIT0, &P1OUT				; enable  LED1 (Red)
+			bic.b	#BIT6, &P6OUT				; disable LED2 (Green)
+			mov.w	global_delay, R6
+			jmp		red_on_delay
+
+else_if_2:
+			cmp.w	#04h, R5
+			jnz		else					; if R5 is equal not equal to 02h, jump to elif_1
+
+			bis.b	#BIT0, &P1OUT				; enable LED1 (Red)
+			bis.b	#BIT6, &P6OUT				; enable LED2 (Green)
+			mov.w	global_delay, R6
+			jmp		both_on_delay
+else:
+			bic.b	#BIT0, &P1OUT
+			bic.b	#BIT6, &P6OUT
+			jmp		end_if
+
+end_if:
+			jmp		if

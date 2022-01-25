@@ -1,0 +1,8 @@
+
+**** Build of configuration Debug for project Lab11.1_ASM_ISRFlash_Ward ****
+
+"C:\\ti\\ccs1040\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+gmake[1]: 'Lab11.1_ASM_ISRFlash_Ward.out' is up to date.
+
+**** Build Finished ****

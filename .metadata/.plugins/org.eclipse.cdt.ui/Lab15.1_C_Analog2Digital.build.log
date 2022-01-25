@@ -1,0 +1,8 @@
+
+**** Build of configuration Debug for project Lab15.1_C_Analog2Digital ****
+
+"C:\\ti\\ccs1040\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+gmake[1]: 'Lab15.1_C_Analog2Digital.out' is up to date.
+
+**** Build Finished ****
