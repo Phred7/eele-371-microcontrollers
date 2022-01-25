@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v20.2.5                     
 ******************************************************************************
->> Linked Mon Jan 24 23:12:43 2022
+>> Linked Tue Jan 25 12:11:39 2022
 
 OUTPUT FILE NAME:   <Adv_Microcontrollers_Project_1_ASM_Ward.out>
 ENTRY POINT SYMBOL: "RESET"  address: 00008000

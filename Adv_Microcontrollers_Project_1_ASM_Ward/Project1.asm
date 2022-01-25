@@ -43,7 +43,7 @@ init:
 			bis.w 	#TBIDEX__8, &TB0EX0		; choose divider for D2 (D2 = 8)
 
 			; TB0 interrupt: Compare
-			mov.w	#32992d, &TB0CCR0		; N = 15625: TB0 @ 0.5sec
+			mov.w	#32992d, &TB0CCR0		; N = 15625: TB0 @ 0.5sec, N = 32992d for 1Hz
 			bis.w	#CCIE, &TB0CCTL0
 			bic.w	#CCIFG, &TB0CCTL0
 
@@ -65,11 +65,11 @@ flash_red:
 				ret
 
 delay:
-				mov.w	global_inner_delay, R5
-dec_inner:		dec		R5
-				jnz		dec_inner
-				dec		R4
-				jnz		delay
+				mov.w	global_inner_delay, R5	; sets inner loop delay
+dec_inner:		dec		R5						; decrements inner delay reg
+				jnz		dec_inner				; loop if R5 is not 0
+				dec		R4						; decrements outer delay reg
+				jnz		delay					; loop if R4 is not 0
 				ret
 
 
@@ -91,8 +91,8 @@ TimerB0_ISR:
 					.data
 					.retain
 
-global_outer_delay:		.short	00005h ; 00005h + 0FFFFh
-global_inner_delay:		.short  0FFFFh
+global_outer_delay:		.short	00BD3h
+global_inner_delay:		.short  00072h
 
 ;-------------------------------------------------------------------------------
 ; Stack Pointer definition
