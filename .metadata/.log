@@ -7488,7 +7488,62 @@ java.lang.NullPointerException
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:657)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:594)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
-!SESSION 2022-01-26 15:19:56.216 -----------------------------------------------
+
+!ENTRY org.eclipse.core.resources 4 568 2022-01-28 09:54:35.311
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\wward\Documents\GitHub\eele-371-microcontrollers\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:48)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:44)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1765)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1846)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1202)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1143)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:55)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.resources 4 568 2022-01-28 10:56:46.283
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\wward\Documents\GitHub\eele-371-microcontrollers\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:48)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:44)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1765)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1846)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1202)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1143)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:55)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.ui.ide 4 4 2022-01-28 11:05:14.806
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2022-01-28 11:05:14.809
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2022-01-28 11:05:14.809
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\wward\Documents\GitHub\eele-371-microcontrollers\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers (The system cannot find the path specified)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:55)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1657)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1736)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1177)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2333)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:509)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+!SESSION 2022-01-30 23:32:34.608 -----------------------------------------------
 eclipse.buildId=4.14.0.I20191210-0610
 java.version=1.8.0_144
 java.vendor=Oracle Corporation
@@ -7496,61 +7551,72 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
 Framework arguments:  -product com.ti.ccstudio.branding.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ti.ccstudio.branding.product
 
-!ENTRY com.ti.common.core 1 0 2022-01-26 15:20:06.219
+!ENTRY com.ti.common.core 1 0 2022-01-30 23:32:38.380
 !MESSAGE path=ccs_base/DebugServer
 
-!ENTRY com.ti.common.core 1 0 2022-01-26 15:20:06.225
+!ENTRY com.ti.common.core 1 0 2022-01-30 23:32:38.384
 !MESSAGE debugServerDir=C:/ti/ccs1040/ccs/ccs_base/DebugServer
 
-!ENTRY com.ti.ccstudio.ui 1 0 2022-01-26 15:20:15.140
+!ENTRY com.ti.ccstudio.ui 1 0 2022-01-30 23:32:44.580
 !MESSAGE CCS IDE session started!
 	CCS build: 10.4.0.00006
 	CCS location: C:/ti/ccs1040/ccs
-	Workspace location: C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers
+	Workspace location: C:/Users/wward/Documents/GitHub/eele-371-microcontrollers (previously: C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers)
 
-!ENTRY com.ti.ccstudio.debug.server 4 214294189 2022-01-26 15:20:15.221
-!MESSAGE Unexpected CCS exit detected [12/23/21 9:34 PM]!!!
-
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-26 15:20:15.330
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-30 23:32:44.751
 !MESSAGE constructor
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-26 15:20:15.335
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-30 23:32:44.754
 !MESSAGE done with directories
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-26 15:20:15.340
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-30 23:32:44.757
 !MESSAGE loading ti_logger
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-26 15:20:15.345
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-30 23:32:44.760
 !MESSAGE Platform os: win32
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-26 15:20:15.349
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-30 23:32:44.763
 !MESSAGE loading cToolsIF
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-26 15:20:15.363
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-30 23:32:44.767
 !MESSAGE loading cTools
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-26 15:20:15.370
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-30 23:32:44.771
 !MESSAGE loading TraceFactory
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-26 15:20:15.377
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-30 23:32:44.775
 !MESSAGE loading sqlite3
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-26 15:20:15.384
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-30 23:32:44.779
 !MESSAGE loading CloudTrace
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-26 15:20:15.399
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-30 23:32:44.788
 !MESSAGE CloudTrace interface loaded
 
-!ENTRY com.ti.ccstudio.project.ui.webcontent 1 0 2022-01-26 15:20:15.469
-!MESSAGE CCS HTTP adapter started! [ccs.port:62807] - Open 'http://localhost:62807/ide' in web browser to see listing of available APIs...
+!ENTRY com.ti.ccstudio.project.ui.webcontent 1 0 2022-01-30 23:32:44.849
+!MESSAGE CCS HTTP adapter started! [ccs.port:65349] - Open 'http://localhost:65349/ide' in web browser to see listing of available APIs...
 
-!ENTRY org.eclipse.equinox.p2.updatechecker 4 0 2022-01-26 16:39:30.004
-!MESSAGE Exception in update check thread
+!ENTRY org.eclipse.ui.ide 4 4 2022-01-31 17:42:13.447
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2022-01-31 17:42:13.453
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2022-01-31 17:42:13.453
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
 !STACK 0
-java.lang.IllegalArgumentException: timeout value is negative
-	at java.lang.Thread.sleep(Native Method)
-	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker$UpdateCheckThread.run(UpdateChecker.java:90)
-!SESSION 2022-01-27 13:17:49.509 -----------------------------------------------
+java.io.FileNotFoundException: C:\Users\wward\Documents\GitHub\eele-371-microcontrollers\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers (The system cannot find the path specified)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:55)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1657)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1736)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1177)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2333)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:509)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+!SESSION 2022-02-03 16:50:55.240 -----------------------------------------------
 eclipse.buildId=4.14.0.I20191210-0610
 java.version=1.8.0_144
 java.vendor=Oracle Corporation
@@ -7558,57 +7624,298 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
 Framework arguments:  -product com.ti.ccstudio.branding.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ti.ccstudio.branding.product
 
-!ENTRY com.ti.common.core 1 0 2022-01-27 13:17:56.109
+!ENTRY com.ti.common.core 1 0 2022-02-03 16:50:58.932
 !MESSAGE path=ccs_base/DebugServer
 
-!ENTRY com.ti.common.core 1 0 2022-01-27 13:17:56.114
+!ENTRY com.ti.common.core 1 0 2022-02-03 16:50:58.936
 !MESSAGE debugServerDir=C:/ti/ccs1040/ccs/ccs_base/DebugServer
 
-!ENTRY com.ti.ccstudio.ui 1 0 2022-01-27 13:18:19.050
+!ENTRY com.ti.ccstudio.ui 1 0 2022-02-03 16:51:05.620
 !MESSAGE CCS IDE session started!
 	CCS build: 10.4.0.00006
 	CCS location: C:/ti/ccs1040/ccs
-	Workspace location: C:/Users/wward/Desktop/All Work/Code Resources/Workspaces/microcontrollers
+	Workspace location: C:/Users/wward/Documents/GitHub/eele-371-microcontrollers
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-27 13:18:19.352
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-03 16:51:05.747
 !MESSAGE constructor
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-27 13:18:19.357
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-03 16:51:05.750
 !MESSAGE done with directories
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-27 13:18:19.362
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-03 16:51:05.753
 !MESSAGE loading ti_logger
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-27 13:18:19.367
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-03 16:51:05.758
 !MESSAGE Platform os: win32
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-27 13:18:19.372
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-03 16:51:05.761
 !MESSAGE loading cToolsIF
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-27 13:18:19.392
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-03 16:51:05.767
 !MESSAGE loading cTools
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-27 13:18:19.421
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-03 16:51:05.772
 !MESSAGE loading TraceFactory
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-27 13:18:19.444
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-03 16:51:05.775
 !MESSAGE loading sqlite3
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-27 13:18:19.469
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-03 16:51:05.801
 !MESSAGE loading CloudTrace
 
-!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-01-27 13:18:19.562
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-03 16:51:05.813
 !MESSAGE CloudTrace interface loaded
 
-!ENTRY com.ti.ccstudio.project.ui.webcontent 1 0 2022-01-27 13:18:19.701
-!MESSAGE CCS HTTP adapter started! [ccs.port:60739] - Open 'http://localhost:60739/ide' in web browser to see listing of available APIs...
+!ENTRY com.ti.ccstudio.project.ui.webcontent 1 0 2022-02-03 16:51:05.877
+!MESSAGE CCS HTTP adapter started! [ccs.port:64566] - Open 'http://localhost:64566/ide' in web browser to see listing of available APIs...
 
-!ENTRY org.eclipse.cdt.core 1 0 2022-01-27 13:18:51.079
-!MESSAGE Indexed 'Adv_Microcontrollers_Project_2_ASM_Ward' (0 sources, 0 headers) in 0.023 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+!ENTRY org.eclipse.ui.ide 4 4 2022-02-03 16:51:52.943
+!MESSAGE Problems saving workspace
 
-!ENTRY org.eclipse.equinox.p2.updatechecker 4 0 2022-01-27 16:19:40.538
-!MESSAGE Exception in update check thread
+!ENTRY org.eclipse.ui.ide 4 1 2022-02-03 16:51:52.948
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2022-02-03 16:51:52.948
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
 !STACK 0
-java.lang.IllegalArgumentException: timeout value is negative
-	at java.lang.Thread.sleep(Native Method)
-	at org.eclipse.equinox.internal.p2.updatechecker.UpdateChecker$UpdateCheckThread.run(UpdateChecker.java:90)
+java.io.FileNotFoundException: C:\Users\wward\Documents\GitHub\eele-371-microcontrollers\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers (The system cannot find the path specified)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:55)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1657)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1736)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1177)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2333)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:509)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+!SESSION 2022-02-04 09:59:06.797 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ti.ccstudio.branding.product
+
+!ENTRY com.ti.common.core 1 0 2022-02-04 09:59:10.611
+!MESSAGE path=ccs_base/DebugServer
+
+!ENTRY com.ti.common.core 1 0 2022-02-04 09:59:10.613
+!MESSAGE debugServerDir=C:/ti/ccs1040/ccs/ccs_base/DebugServer
+
+!ENTRY com.ti.ccstudio.ui 1 0 2022-02-04 09:59:17.368
+!MESSAGE CCS IDE session started!
+	CCS build: 10.4.0.00006
+	CCS location: C:/ti/ccs1040/ccs
+	Workspace location: C:/Users/wward/Documents/GitHub/eele-371-microcontrollers
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-04 09:59:17.446
+!MESSAGE constructor
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-04 09:59:17.448
+!MESSAGE done with directories
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-04 09:59:17.450
+!MESSAGE loading ti_logger
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-04 09:59:17.453
+!MESSAGE Platform os: win32
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-04 09:59:17.455
+!MESSAGE loading cToolsIF
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-04 09:59:17.458
+!MESSAGE loading cTools
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-04 09:59:17.461
+!MESSAGE loading TraceFactory
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-04 09:59:17.464
+!MESSAGE loading sqlite3
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-04 09:59:17.467
+!MESSAGE loading CloudTrace
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-04 09:59:17.473
+!MESSAGE CloudTrace interface loaded
+
+!ENTRY com.ti.ccstudio.project.ui.webcontent 1 0 2022-02-04 09:59:17.511
+!MESSAGE CCS HTTP adapter started! [ccs.port:52789] - Open 'http://localhost:52789/ide' in web browser to see listing of available APIs...
+
+!ENTRY org.eclipse.ui.ide 4 4 2022-02-04 22:19:10.254
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2022-02-04 22:19:10.260
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2022-02-04 22:19:10.260
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\wward\Documents\GitHub\eele-371-microcontrollers\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers (The system cannot find the path specified)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:55)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1657)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1736)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1177)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2333)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:509)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+!SESSION 2022-02-10 16:32:11.512 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ti.ccstudio.branding.product
+
+!ENTRY com.ti.common.core 1 0 2022-02-10 16:32:17.328
+!MESSAGE path=ccs_base/DebugServer
+
+!ENTRY com.ti.common.core 1 0 2022-02-10 16:32:17.332
+!MESSAGE debugServerDir=C:/ti/ccs1040/ccs/ccs_base/DebugServer
+
+!ENTRY com.ti.ccstudio.ui 1 0 2022-02-10 16:32:23.790
+!MESSAGE CCS IDE session started!
+	CCS build: 10.4.0.00006
+	CCS location: C:/ti/ccs1040/ccs
+	Workspace location: C:/Users/wward/Documents/GitHub/eele-371-microcontrollers
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-10 16:32:23.944
+!MESSAGE constructor
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-10 16:32:23.947
+!MESSAGE done with directories
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-10 16:32:23.949
+!MESSAGE loading ti_logger
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-10 16:32:23.953
+!MESSAGE Platform os: win32
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-10 16:32:23.956
+!MESSAGE loading cToolsIF
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-10 16:32:23.961
+!MESSAGE loading cTools
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-10 16:32:23.966
+!MESSAGE loading TraceFactory
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-10 16:32:23.970
+!MESSAGE loading sqlite3
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-10 16:32:23.975
+!MESSAGE loading CloudTrace
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-10 16:32:23.986
+!MESSAGE CloudTrace interface loaded
+
+!ENTRY com.ti.ccstudio.project.ui.webcontent 1 0 2022-02-10 16:32:24.050
+!MESSAGE CCS HTTP adapter started! [ccs.port:63998] - Open 'http://localhost:63998/ide' in web browser to see listing of available APIs...
+
+!ENTRY org.eclipse.ui.ide 4 4 2022-02-13 20:43:47.466
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2022-02-13 20:43:47.472
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2022-02-13 20:43:47.472
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\wward\Documents\GitHub\eele-371-microcontrollers\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers (The system cannot find the path specified)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:55)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1657)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1736)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1177)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2333)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor.lambda$1(IDEWorkbenchAdvisor.java:509)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+!SESSION 2022-02-17 15:14:42.077 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product com.ti.ccstudio.branding.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product com.ti.ccstudio.branding.product
+
+!ENTRY com.ti.common.core 1 0 2022-02-17 15:14:46.035
+!MESSAGE path=ccs_base/DebugServer
+
+!ENTRY com.ti.common.core 1 0 2022-02-17 15:14:46.039
+!MESSAGE debugServerDir=C:/ti/ccs1040/ccs/ccs_base/DebugServer
+
+!ENTRY com.ti.ccstudio.ui 1 0 2022-02-17 15:14:52.561
+!MESSAGE CCS IDE session started!
+	CCS build: 10.4.0.00006
+	CCS location: C:/ti/ccs1040/ccs
+	Workspace location: C:/Users/wward/Documents/GitHub/eele-371-microcontrollers
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-17 15:14:52.696
+!MESSAGE constructor
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-17 15:14:52.700
+!MESSAGE done with directories
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-17 15:14:52.703
+!MESSAGE loading ti_logger
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-17 15:14:52.706
+!MESSAGE Platform os: win32
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-17 15:14:52.709
+!MESSAGE loading cToolsIF
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-17 15:14:52.713
+!MESSAGE loading cTools
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-17 15:14:52.718
+!MESSAGE loading TraceFactory
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-17 15:14:52.722
+!MESSAGE loading sqlite3
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-17 15:14:52.726
+!MESSAGE loading CloudTrace
+
+!ENTRY com.ti.dbgtrc.webapp.CloudTraceInterface 0 0 2022-02-17 15:14:52.737
+!MESSAGE CloudTrace interface loaded
+
+!ENTRY com.ti.ccstudio.project.ui.webcontent 1 0 2022-02-17 15:14:52.824
+!MESSAGE CCS HTTP adapter started! [ccs.port:56234] - Open 'http://localhost:56234/ide' in web browser to see listing of available APIs...
+
+!ENTRY org.eclipse.core.resources 4 567 2022-02-17 15:16:40.370
+!MESSAGE The project description file (.project) for 'Lab1.1_ASM_Blinky1_Ward' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+!STACK 0
+java.lang.Exception: The project description file (.project) for 'Lab1.1_ASM_Blinky1_Ward' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:907)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:888)
+	at org.eclipse.core.internal.resources.SaveManager.restore(SaveManager.java:763)
+	at org.eclipse.core.internal.resources.Project.open(Project.java:1060)
+	at org.eclipse.ui.actions.OpenResourceAction$1.doOpenWithReferences(OpenResourceAction.java:233)
+	at org.eclipse.ui.actions.OpenResourceAction$1.runInWorkspace(OpenResourceAction.java:279)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:42)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.resources 4 568 2022-02-17 15:16:50.110
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\wward\Documents\GitHub\eele-371-microcontrollers\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (The system cannot find the path specified)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:48)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:44)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1765)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1846)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1202)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1143)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:55)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

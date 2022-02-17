@@ -27,36 +27,36 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ; Main loop here
 ;-------------------------------------------------------------------------------
 init:
-			bis.b	#BIT6, &P6DIR ; set green LED2 as out
-			bic.b	#BIT6, &P6OUT ; set init val to 0
+				bis.b	#BIT6, &P6DIR ; set green LED2 as out
+				bic.b	#BIT6, &P6OUT ; set init val to 0
 
-			bis.b	#BIT0, &P1DIR ; set red LED1 as out
-			bic.b	#BIT0, &P1OUT ; set init val to 0
+				bis.b	#BIT0, &P1DIR ; set red LED1 as out
+				bic.b	#BIT0, &P1OUT ; set init val to 0
 
-			; setup timber TB0: delta-5 = 1sec
-			bis.w	#TBCLR, &TB0CTL 		; clears timers and dividers
-			bis.w	#TBSSEL__SMCLK, &TB0CTL	; choose clock (f = 1 MHz)
-			bis.w	#MC__UP, &TB0CTL		; choose mode (UP)
+				; setup timber TB0: delta-5 = 1sec
+				bis.w	#TBCLR, &TB0CTL 		; clears timers and dividers
+				bis.w	#TBSSEL__SMCLK, &TB0CTL	; choose clock (f = 1 MHz)
+				bis.w	#MC__UP, &TB0CTL		; choose mode (UP)
 
-			bis.w	#CNTL_0, &TB0CTL		; choose counter length (N = 2^16)
-			bis.w	#ID__4, &TB0CTL			; choose divider for D1 (D1 = 4)
-			bis.w 	#TBIDEX__8, &TB0EX0		; choose divider for D2 (D2 = 8)
+				bis.w	#CNTL_0, &TB0CTL		; choose counter length (N = 2^16)
+				bis.w	#ID__4, &TB0CTL			; choose divider for D1 (D1 = 4)
+				bis.w 	#TBIDEX__8, &TB0EX0		; choose divider for D2 (D2 = 8)
 
-			; TB0 interrupt: Compare
-			mov.w	#32992d, &TB0CCR0		; N = 15625: TB0 @ 0.5sec, N = 32992d for 1Hz
-			bis.w	#CCIE, &TB0CCTL0
-			bic.w	#CCIFG, &TB0CCTL0
+				; TB0 interrupt: Compare
+				mov.w	#32992d, &TB0CCR0		; N = 15625: TB0 @ 0.5sec, N = 32992d for 1Hz
+				bis.w	#CCIE, &TB0CCTL0
+				bic.w	#CCIFG, &TB0CCTL0
 
-			nop
-			eint							; assert global interrupt flag
-			nop
+				nop
+				eint							; assert global interrupt flag
+				nop
 
-			bic.b	#LOCKLPM5, &PM5CTL0		; disable DIO low-power default
+				bic.b	#LOCKLPM5, &PM5CTL0		; disable DIO low-power default
 
 main:
-			call #flash_red
-			jmp main
-			nop
+				call #flash_red
+				jmp main
+				nop
 
 flash_red:
 				xor.b	#BIT0, &P1OUT
@@ -79,17 +79,17 @@ dec_inner:		dec		R5						; decrements inner delay reg
 
 ; Service TB0
 TimerB0_ISR:
-			xor.b	#BIT6, &P6OUT
-			bic.w	#TBIFG, &TB0CTL
-			reti
+				xor.b	#BIT6, &P6OUT
+				bic.w	#TBIFG, &TB0CTL
+				reti
 ;-------------- END service_TB0 --------------
 
 ;-------------------------------------------------------------------------------
 ; Memory Allocation
 ;-------------------------------------------------------------------------------
 
-					.data
-					.retain
+						.data
+						.retain
 
 global_outer_delay:		.short	00BD3h
 global_inner_delay:		.short  00072h
